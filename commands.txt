@@ -1,0 +1,18 @@
+=> npm init -y
+    // "main": "server.js"
+
+=> npm i express
+
+=> express-ejs-layouts
+
+=> npm i --save-dev nodemon 
+    //  "start": "node server.js",
+    //  "devStart": "nodemon server.js"
+        // => npm run serverStart
+
+=> npm i ejs
+
+=> npm install -g sass
+
+=> npm i --save-dev dotenv
+    // env variables
