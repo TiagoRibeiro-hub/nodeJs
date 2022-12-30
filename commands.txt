@@ -8,7 +8,7 @@
 => npm i --save-dev nodemon 
     //  "start": "node server.js",
     //  "devStart": "nodemon server.js"
-        // => npm run serverStart
+        // => npm run devStart
 
 => npm i ejs
 

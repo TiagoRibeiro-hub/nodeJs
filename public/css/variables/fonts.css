@@ -1,0 +1,14 @@
+@font-face {
+    font-family: freshman;
+    src: url('../fonts/freshman/Freshman.ttf');
+}
+
+@font-face {
+    font-family: lt_funk;
+    src: url('../fonts/lt_funk/LT\ Funk.otf');
+}
+
+:root {
+    --font-lt-funk: lt_funk;
+    --font-freshman: freshman;
+}

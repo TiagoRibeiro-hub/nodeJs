@@ -1,42 +1,38 @@
-:root {
-    font-family: 'Quicksand', sans-serif;
-    font-size: 18px;
-    color: #eee;
-    --color-dark-blue: #002335;
-    --color-light-blue: #003652;
-}
-
+@import url('./variables/fonts.css');
+@import url('./variables/colors.css');
 body {
+    font-family: var(--font-freshman);
+    font-size: 18px;
+    color: var(--color-white) !important;
     background: linear-gradient((to right, var(--color-dark-blue), var(--color-light-blue)));
     background: -moz-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
     background: -webkit-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
     background: -webkit-gradient(linear, right top, left top, from(var(--color-dark-blue)), to(var(--color-light-blue)));
 }
 
+a {
+    color: var(--color-white) !important;
+    font-family: var(--font-lt-funk);
+    font-size: 30px;
+}
+
 .container {
-    margin: 60px;
+    margin: 25px;
 }
 
-
-/* .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--nav-width);
-    height: 100vh;
-    background: #222222;
-    padding-top: 60px;
+nav {
+    margin-top: 0.5rem;
+    background: linear-gradient((to right, var(--color-dark-blue), var(--color-light-blue)));
+    background: -moz-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
+    background: -webkit-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
+    background: -webkit-gradient(linear, right top, left top, from(var(--color-dark-blue)), to(var(--color-light-blue)));
+    border-bottom: 1px solid var(--color-white);
 }
 
-.nav__link {
-    display: block;
-    padding: 12px 12px 12px 25px;
-    text-decoration: none;
-    color: #eeeeee;
-    font-weight: 500;
-    border-bottom: 1px solid #eeeeee
+.nav-link {
+    margin: 0px 20px;
 }
 
-.nav__link:hover {
-    background: rgba(255, 255, 255, 0.05);
+.navbar-toggler {
+    background: var(--color-white) !important;
 }
