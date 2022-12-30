@@ -1,0 +1,42 @@
+:root {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+    color: #eee;
+    --color-dark-blue: #002335;
+    --color-light-blue: #003652;
+}
+
+body {
+    background: linear-gradient((to right, var(--color-dark-blue), var(--color-light-blue)));
+    background: -moz-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
+    background: -webkit-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
+    background: -webkit-gradient(linear, right top, left top, from(var(--color-dark-blue)), to(var(--color-light-blue)));
+}
+
+.container {
+    margin: 60px;
+}
+
+
+/* .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--nav-width);
+    height: 100vh;
+    background: #222222;
+    padding-top: 60px;
+}
+
+.nav__link {
+    display: block;
+    padding: 12px 12px 12px 25px;
+    text-decoration: none;
+    color: #eeeeee;
+    font-weight: 500;
+    border-bottom: 1px solid #eeeeee
+}
+
+.nav__link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
