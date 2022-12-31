@@ -1,5 +1,8 @@
+@import url('../lib/bootstrap.min.css');
 @import url('./variables/fonts.css');
 @import url('./variables/colors.css');
+@import url('./_nav.css');
+@import url('./_toast.css');
 body {
     font-family: var(--font-freshman);
     font-size: 18px;
@@ -18,21 +21,4 @@ a {
 
 .container {
     margin: 25px;
-}
-
-nav {
-    margin-top: 0.5rem;
-    background: linear-gradient((to right, var(--color-dark-blue), var(--color-light-blue)));
-    background: -moz-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
-    background: -webkit-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
-    background: -webkit-gradient(linear, right top, left top, from(var(--color-dark-blue)), to(var(--color-light-blue)));
-    border-bottom: 1px solid var(--color-white);
-}
-
-.nav-link {
-    margin: 0px 20px;
-}
-
-.navbar-toggler {
-    background: var(--color-white) !important;
 }
