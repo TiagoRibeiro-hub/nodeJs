@@ -59,9 +59,6 @@
 </div>
 
 
-
-
-
 <script>
     class PwdGenerate {
         constructor(pwdLength = 8, upperCase = true, lowerCase = true, numbers = true, symbols = true, excludeDuplicates = true) {
@@ -102,6 +99,7 @@
 
     const pwdLength = document.getElementById("pwdLength");
     const lblError = document.getElementById("lbl-error");
+    const valuePwd = document.getElementById("valuePwd");
     const setPwd = document.getElementById("setPwd");
     const copyPwd = document.getElementById("copyPwd");
 
@@ -110,11 +108,6 @@
     pwdLength.addEventListener('change', function(e) {
 
         const value = parseInt(this.value);
-
-        switch (value) {
-            case value < 8:
-                break;
-        }
 
         if (value < 8) {
             pwdLength.value = minimumAdvisable;
@@ -157,19 +150,12 @@
     });
 
     setPwd.addEventListener('click', function() {
-
+        valuePwd.readOnly = false;
+        valuePwd.value = pwdGenerate.get();
+        valuePwd.readOnly = true;
     })
 
     copyPwd.addEventListener('click', function() {
         navigator.clipboard.writeText(copyText.value);
-    })
-
-
-    setPwd.addEventListener('click', function() {
-
-    })
-
-    copyPwd.addEventListener('click', function() {
-        navigator.clipboard.writeText(document.getElementById("valuePwd").value);
     })
 </script>
