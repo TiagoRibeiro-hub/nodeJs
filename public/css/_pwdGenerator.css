@@ -1,0 +1,26 @@
+.pwd-container {
+    width: 60vw;
+}
+
+.checkbox-container {
+    display: inline-grid;
+    width: 100%;
+}
+
+input.pwd-length {
+    margin: 0;
+    width: 60px;
+    height: 20px;
+    border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    -webkit-border-radius: 3px !important;
+    padding-top: 2px;
+}
+
+input.pwd-length:focus {
+    box-shadow: none;
+}
+
+#setPwd {
+    width: 100px;
+}

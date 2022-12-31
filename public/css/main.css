@@ -1,7 +1,9 @@
 @import url('../lib/bootstrap.min.css');
+@import url('./icons/fontawesome/css/all.min.css');
 @import url('./variables/fonts.css');
 @import url('./variables/colors.css');
 @import url('./_nav.css');
+@import url('./_pwdGenerator.css');
 @import url('./_toast.css');
 body {
     font-family: var(--font-freshman);
@@ -19,6 +21,6 @@ a {
     font-size: 30px;
 }
 
-.container {
+.layout-container {
     margin: 25px;
 }
