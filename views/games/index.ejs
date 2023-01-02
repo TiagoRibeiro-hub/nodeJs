@@ -1,1 +1,14 @@
-Games Index
+<%- include('../partials/title.ejs') %>
+    <div class="games-container">
+        <button class="arrow-left control" aria-label="Previous image">◀</button>
+        <button class="arrow-right control" aria-label="Next Image" id="next">▶</button>
+        <div class="gallery-wrapper">
+            <div class="gallery">
+                <% images.forEach(image => {%>
+                    <img src="<%=image %>" alt="Beach Image" class="item current-item">
+                    <%})%>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/carousel.js"></script>

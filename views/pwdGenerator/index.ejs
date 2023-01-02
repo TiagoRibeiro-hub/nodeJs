@@ -1,61 +1,59 @@
-<div class="d-flex justify-content-center mt-5">
-    <h2>Password Generator</h2>
-</div>
-<div class="d-flex justify-content-center mt-5">
-    <div class="pwd-container">
-        <div class="input-group mb-4">
-            <input id="valuePwd" type="text" class="form-control" aria-describedby="valuePwd" placeholder="Password" readonly>
-            <button type="button" id="copyPwd" class="input-group-text btn btn-light border-start" title="Copy"><i class="fa-regular fa-copy"></i></button>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-md-6 mb-3">
-                <div class="checkbox-container">
-                    <div class="d-flex justify-content-between pe-3 ps-3">
-                        <label class="form-check-label" for="upperCase">Allow Upper Case</label>
-                        <input id="upperCase" class="form-check-input" type="checkbox" checked>
-                    </div>
-                    <div class="d-flex justify-content-between pe-3 ps-3">
-                        <label class="form-check-label" for="lowerCase">Allow Lower Case</label>
-                        <input id="lowerCase" class="form-check-input" type="checkbox" checked>
+<%- include('../partials/title.ejs') %>
+    <div class="d-flex justify-content-center">
+        <div class="pwd-container">
+            <div class="input-group mb-4">
+                <input id="valuePwd" type="text" class="form-control" aria-describedby="valuePwd" placeholder="Password" readonly>
+                <button type="button" id="copyPwd" class="input-group-text btn btn-light border-start" title="Copy"><i class="fa-regular fa-copy"></i></button>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-6 mb-3">
+                    <div class="checkbox-container">
+                        <div class="d-flex justify-content-between pe-3 ps-3">
+                            <label class="form-check-label" for="upperCase">Allow Upper Case</label>
+                            <input id="upperCase" class="form-check-input" type="checkbox" checked>
+                        </div>
+                        <div class="d-flex justify-content-between pe-3 ps-3">
+                            <label class="form-check-label" for="lowerCase">Allow Lower Case</label>
+                            <input id="lowerCase" class="form-check-input" type="checkbox" checked>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-6 mb-3">
-                <div class="checkbox-container">
-                    <div class="d-flex justify-content-between pe-3 ps-3">
-                        <label class="form-check-label" for="numbers">Allow Numbers</label>
-                        <input id="numbers" class="form-check-input" type="checkbox" checked>
-                    </div>
-                    <div class="d-flex justify-content-between pe-3 ps-3">
-                        <label class="form-check-label" for="symbols">Allow Symbols</label>
-                        <input id="symbols" class="form-check-input" type="checkbox" checked>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 mb-3">
-                <div class="checkbox-container">
-                    <div class="d-flex justify-content-between pe-3 ps-3">
-                        <label class="form-check-label" for="excludeDuplicates">Exclude Duplicate Characters</label>
-                        <input id="excludeDuplicates" class="form-check-input" type="checkbox" checked>
+                <div class="col-sm-6 col-md-6 mb-3">
+                    <div class="checkbox-container">
+                        <div class="d-flex justify-content-between pe-3 ps-3">
+                            <label class="form-check-label" for="numbers">Allow Numbers</label>
+                            <input id="numbers" class="form-check-input" type="checkbox" checked>
+                        </div>
+                        <div class="d-flex justify-content-between pe-3 ps-3">
+                            <label class="form-check-label" for="symbols">Allow Symbols</label>
+                            <input id="symbols" class="form-check-input" type="checkbox" checked>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-6 mb-3">
-                <div class="checkbox-container">
-                    <div class="d-flex justify-content-between pe-3 ps-3">
-                        <label class="form-check-label" for="inlineCheckbox1">Password Length</label>
-                        <input id="pwdLength" class="form-check-input float-end pwd-length" type="number" class="form-control">
+                <div class="col-sm-6 col-md-6 mb-3">
+                    <div class="checkbox-container">
+                        <div class="d-flex justify-content-between pe-3 ps-3">
+                            <label class="form-check-label" for="excludeDuplicates">Exclude Duplicate Characters</label>
+                            <input id="excludeDuplicates" class="form-check-input" type="checkbox" checked>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-12 col-md-12 mb-3">
-                <div class="checkbox-container d-flex justify-content-end align-items-center pe-3 ps-3">
-                    <label id="lbl-error" class="me-5"></label>
-                    <button type="button" id="setPwd" class="btn btn-light">Set</button>
+                <div class="col-sm-6 col-md-6 mb-3">
+                    <div class="checkbox-container">
+                        <div class="d-flex justify-content-between pe-3 ps-3">
+                            <label class="form-check-label" for="inlineCheckbox1">Password Length</label>
+                            <input id="pwdLength" class="form-check-input float-end pwd-length" type="number" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 mb-3">
+                    <div class="checkbox-container d-flex justify-content-end align-items-center pe-3 ps-3">
+                        <label id="lbl-error" class="me-5"></label>
+                        <button type="button" id="setPwd" class="btn btn-light">Set</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script type="module" src="/js/pwd.js"></script>
+    <script type="module" src="/js/pwd.js"></script>

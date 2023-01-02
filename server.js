@@ -7,8 +7,6 @@ const expressLayouts = require('express-ejs-layouts');
 
 const path = require("path");
 
-
-
 const indexRouter = require('./routes/index');
 const pwdGeneratorRouter = require('./routes/pwdGenerator');
 const gamesRouter = require('./routes/games');
@@ -26,6 +24,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Routes
 app.use('/', indexRouter);
