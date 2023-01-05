@@ -3,6 +3,7 @@
 @import url('./variables/colors.css');
 @import url('./_nav.css');
 @import url('./_pwdGenerator.css');
+@import url('./_tictactoe.css');
 @import url('./_carousel.css');
 @import url('./_toast.css');
 body {

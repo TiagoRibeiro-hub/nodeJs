@@ -35,10 +35,10 @@ controls.forEach((control) => {
 document.addEventListener('readystatechange', event => {
     // When HTML/DOM elements are ready:
     if (event.target.readyState === "interactive") {
-        const nextBtn = document.getElementById("next");
-        const middle = Math.floor(maxItems / 2);
-        for (let i = 0; i < middle; i++) {
-            nextBtn.click();
-        }
+        // const nextBtn = document.getElementById("next");
+        // const middle = Math.floor(maxItems / 2);
+        // for (let i = 0; i < middle; i++) {
+        //     nextBtn.click();
+        // }
     }
 });

@@ -1,0 +1,25 @@
+<div id="enemy-screen" class="center">
+    <h2>Play against:</h2>
+    <button type="button" id="choose-human" class="choose">Human</button>
+    <button type="button" id="choose-cpu" class="choose">CPU</button>
+</div>
+
+<div id="difficulty-screen" class="center hidden">
+    <h2>Difficulty:</h2>
+    <button type="button" id="choose-easy" class="choose">Easy</button>
+    <button type="button" id="choose-medium" class="choose">Medium</button>
+    <button type="button" id="choose-hard" class="choose">Hard</button>
+</div>
+
+<div id="flipCoin-screen" class="center hidden">
+    <h2>Filp the coin:</h2>
+    <button type="button" id="choose-heads" class="choose">Heads</button>
+    <button type="button" id="choose-tails" class="choose">Tails</button>
+</div>
+
+<div id="intro-screen" class="center hidden">
+    <h2>Choose your symbol:</h2>
+    <% playersOptions.forEach(option => {%>
+        <button type="button" id="choose-<%=option %>" class="choose"><%=option %></button>
+        <%})%>
+</div>
