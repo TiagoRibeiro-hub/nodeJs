@@ -7,7 +7,6 @@ const playersScreen = document.getElementById('players-screen');
 const difficultyScreen = document.getElementById('difficulty-screen');
 const flipCoinScreen = document.getElementById('flipCoin-screen');
 const introScreen = document.getElementById('intro-screen');
-const gameScreen = document.getElementById('game-screen');
 // buttons
 const humanBtn = document.getElementById('btn-human');
 const cpuBtn = document.getElementById('btn-cpu');
@@ -38,8 +37,8 @@ function toggleHideAndShow(screen) {
         case constants.game.INTRO:
             helper.toggle(introScreen);
             break;
-        case constants.game.GAEM_TABLE:
-            helper.toggle(gameScreen);
+        case constants.game.GAME_TABLE:
+            helper.toggle(document.getElementById('game-screen'));
             break;
     }
 };
@@ -71,7 +70,7 @@ saveBtn.addEventListener('click', function() {
     if (game._enemy === constants.game.CPU) {
         const difficultyBtns = document.querySelectorAll(".difficulty");
         difficultyBtns.forEach((btn) => {
-            btn.addEventListener("click", (e) => {
+            btn.addEventListener("click", function(e) {
                 const target = e.target;
                 switch (target.id) {
                     case constants.game.EASY:
@@ -95,7 +94,7 @@ saveBtn.addEventListener('click', function() {
 });
 
 flipCoinBtns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", function(e) {
         const target = e.target;
         switch (target.id) {
             case constants.game.HEADS:
@@ -123,7 +122,7 @@ flipCoinBtns.forEach((btn) => {
 
 const pieceBtns = document.querySelectorAll(".piece");
 pieceBtns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", function(e) {
         const target = e.target;
         switch (e.target.id) {
             case "0":
@@ -134,7 +133,7 @@ pieceBtns.forEach((btn) => {
                 break;
         }
         toggleHideAndShow(constants.game.INTRO);
-        toggleHideAndShow(constants.game.GAEM_TABLE);
+        toggleHideAndShow(constants.game.GAME_TABLE);
 
         function setPiece(index) {
             if (game._startingPlayer == game._playerOne._name) {
@@ -147,3 +146,5 @@ pieceBtns.forEach((btn) => {
         }
     });
 });
+
+export default game;

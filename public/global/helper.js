@@ -18,8 +18,7 @@ const helper = function() {
     return {
         randomNumber: _randomNumber,
         flipCoin: _flipCoin,
-        toggle: _toggle
-
+        toggle: _toggle,
     };
 }
 

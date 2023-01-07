@@ -4,7 +4,7 @@ const items = document.querySelectorAll(".item");
 const maxItems = items.length;
 
 controls.forEach((control) => {
-    control.addEventListener("click", (e) => {
+    control.addEventListener("click", function(e) {
         isLeft = e.target.classList.contains("arrow-left");
 
         if (isLeft) {
@@ -32,7 +32,7 @@ controls.forEach((control) => {
     });
 });
 
-document.addEventListener('readystatechange', event => {
+document.addEventListener('readystatechange', function(e) {
     // When HTML/DOM elements are ready:
     if (event.target.readyState === "interactive") {
         // const nextBtn = document.getElementById("next");

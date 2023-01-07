@@ -21,13 +21,19 @@ router.get('/', function(req, res) {
     });
 })
 
-playersOptionsTicTacToe = [];
+const playersOptionsTicTacToe = [];
 playersOptionsTicTacToe.push("X", "O");
+
+const gameTableSize = [];
+for (let i = 0; i < 9; i++) {
+    gameTableSize.push(i);
+}
 
 router.get('/tictactoe', function(req, res) {
     res.render('games/tictactoe', {
         title: "Tic Tac Toe",
-        playersOptions: playersOptionsTicTacToe
+        playersOptions: playersOptionsTicTacToe,
+        gameTable: gameTableSize
     });
 })
 

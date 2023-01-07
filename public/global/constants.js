@@ -22,7 +22,7 @@ const constants = function() {
         HARD: "hard",
         HEADS: "heads",
         TAILS: "tails",
-        GAEM_TABLE: "game"
+        GAME_TABLE: "game"
     });
     return {
         pwd: _pwd,
