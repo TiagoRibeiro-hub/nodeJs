@@ -20,9 +20,9 @@ function setLblError(text, classOpt) {
         setClass("text-warning", "text-danger");
     }
 
-    lblError.innerHTML = text;
+    lblError.textContent = text;
     const myTimeout = setTimeout(function() {
-        lblError.innerHTML = "";
+        lblError.textContent = "";
         clearTimeout(myTimeout);
     }, 5000);
 

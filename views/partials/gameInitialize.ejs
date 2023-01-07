@@ -1,25 +1,35 @@
-<div id="enemy-screen" class="center">
+<div id="enemy-screen" class="center hidden">
     <h2>Play against:</h2>
-    <button type="button" id="choose-human" class="choose">Human</button>
-    <button type="button" id="choose-cpu" class="choose">CPU</button>
+    <button type="button" id="btn-human" class="choose">Human</button>
+    <button type="button" id="btn-cpu" class="choose">CPU</button>
+</div>
+
+<div id="players-screen" class="center">
+    <label>Player one name :</label>
+    <input type="text" id="input-playerOne" class="" />
+    <label id="lbl-playerTwo" class="hidden">Player two name :</label>
+    <input type="text" id="input-playerTwo" class="hidden" />
+    <button type="button" id="btn-save" class="choose">Save</button>
 </div>
 
 <div id="difficulty-screen" class="center hidden">
     <h2>Difficulty:</h2>
-    <button type="button" id="choose-easy" class="choose">Easy</button>
-    <button type="button" id="choose-medium" class="choose">Medium</button>
-    <button type="button" id="choose-hard" class="choose">Hard</button>
+    <button type="button" id="easy" class="choose difficulty">Easy</button>
+    <button type="button" id="medium" class="choose difficulty">Medium</button>
+    <button type="button" id="hard" class="choose difficulty">Hard</button>
 </div>
 
 <div id="flipCoin-screen" class="center hidden">
-    <h2>Filp the coin:</h2>
-    <button type="button" id="choose-heads" class="choose">Heads</button>
-    <button type="button" id="choose-tails" class="choose">Tails</button>
+    <h2>Filp the coin, player one choose :</h2>
+    <button type="button" id="heads" class="choose flipCoin">Heads</button>
+    <button type="button" id="tails" class="choose flipCoin">Tails</button>
 </div>
 
 <div id="intro-screen" class="center hidden">
-    <h2>Choose your symbol:</h2>
+    <h2 id="intro-symbol"></h2>
     <% playersOptions.forEach(option => {%>
-        <button type="button" id="choose-<%=option %>" class="choose"><%=option %></button>
+        <input type="button" id="btn-player" class="choose" value="<%=option %>" />
         <%})%>
 </div>
+
+<script type="module"></script>

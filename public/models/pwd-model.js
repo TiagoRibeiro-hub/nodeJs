@@ -1,9 +1,12 @@
+import helper from "/global/helper.js";
+import constants from "/global/constants.js";
+
 class RandomNumbers {
 
     constructor() {}
 
     static get(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        return helper.randomNumber(min, max); //Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     static toChar(min, max) {
@@ -87,15 +90,6 @@ class RandomNumbers {
     }
 }
 
-class Constants {
-    static nrOfLetters = 26;
-    static nrOfNumbers = 10;
-    static nrOfSymbols = 31;
-    static totalChars = this.nrOfLetters * 2 + this.nrOfNumbers + this.nrOfSymbols;
-
-}
-Object.freeze(Constants);
-
 class Generate {
 
     static Pwd = class {
@@ -105,8 +99,8 @@ class Generate {
             pwd += RandomNumbers.getLowerChar(); // lower
             pwd += RandomNumbers.getSymbolChar(); // symbols
 
-            const finalLength = RandomNumbers.finalLenght(pwdLength, Constants.totalChars, excludeDuplicates);
-            return finalLength === Constants.totalChars ?
+            const finalLength = RandomNumbers.finalLenght(pwdLength, constants.pwd.totalChars, excludeDuplicates);
+            return finalLength === constants.pwd.totalChars ?
                 RandomNumbers.pwd(pwd, finalLength, excludeDuplicates, 33, 95, 97, 126) :
                 RandomNumbers.pwd(pwd, finalLength, excludeDuplicates, 33, 47, 58, 95, 97, 126);
         };
@@ -117,45 +111,45 @@ class Generate {
         static upperLower(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getUpperChar(); // upper
             pwd += RandomNumbers.getLowerChar(); // lower
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (Constants.nrOfLetters * 2), excludeDuplicates), excludeDuplicates, 65, 90, 97, 122);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (constants.pwd.nrOfLetters * 2), excludeDuplicates), excludeDuplicates, 65, 90, 97, 122);
         }
 
         static upper(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getUpperChar(); // upper
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, Constants.nrOfLetters, excludeDuplicates), excludeDuplicates, 65, 90);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, constants.pwd.nrOfLetters, excludeDuplicates), excludeDuplicates, 65, 90);
         }
 
         static withSymbols(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getUpperChar(); // upper
             pwd += RandomNumbers.getSymbolChar(); // symbols
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (Constants.nrOfLetters + Constants.nrOfSymbols), excludeDuplicates), excludeDuplicates, 58, 95, 33, 47, 123, 126);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (constants.pwd.nrOfLetters + constants.pwd.nrOfSymbols), excludeDuplicates), excludeDuplicates, 58, 95, 33, 47, 123, 126);
         }
 
         static withNumbers(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getUpperChar(); // upper
             pwd += RandomNumbers.getNumberChar(); // number
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (Constants.nrOfLetters + Constants.nrOfNumbers), excludeDuplicates), excludeDuplicates, 48, 57, 65, 90);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (constants.pwd.nrOfLetters + constants.pwd.nrOfNumbers), excludeDuplicates), excludeDuplicates, 48, 57, 65, 90);
         }
 
         static withNumberSymbols(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getUpperChar(); // upper
             pwd += RandomNumbers.getNumberChar(); // number
             pwd += RandomNumbers.getSymbolChar(); // symbols
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (Constants.nrOfLetters + Constants.nrOfNumbers + Constants.nrOfSymbols), excludeDuplicates), excludeDuplicates, 33, 63, 64, 95, 123, 126);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (constants.pwd.nrOfLetters + constants.pwd.nrOfNumbers + constants.pwd.nrOfSymbols), excludeDuplicates), excludeDuplicates, 33, 63, 64, 95, 123, 126);
         }
 
         static upperLowerSymbols(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getUpperChar(); // upper
             pwd += RandomNumbers.getLowerChar(); // lower
             pwd += RandomNumbers.getSymbolChar(); // symbols
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (Constants.nrOfLetters * 2 + Constants.nrOfSymbols), excludeDuplicates), excludeDuplicates, 58, 95, 97, 126, 33, 47);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (constants.pwd.nrOfLetters * 2 + constants.pwd.nrOfSymbols), excludeDuplicates), excludeDuplicates, 58, 95, 97, 126, 33, 47);
         }
 
         static upperLowerNumbers(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getUpperChar(); // upper
             pwd += RandomNumbers.getNumberChar(); // number
             pwd += RandomNumbers.getLowerChar(); // lower
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (Constants.nrOfLetters * 2 + Constants.nrOfNumbers), excludeDuplicates), excludeDuplicates, 65, 90, 48, 57, 97, 122);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (constants.pwd.nrOfLetters * 2 + constants.pwd.nrOfNumbers), excludeDuplicates), excludeDuplicates, 65, 90, 48, 57, 97, 122);
         }
     };
 
@@ -164,17 +158,17 @@ class Generate {
         static get(pwdLength, excludeDuplicates) {
             let pwd = RandomNumbers.getNumberChar(); // number
             pwd += RandomNumbers.getSymbolChar(); // symbols
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (Constants.nrOfNumbers + Constants.nrOfSymbols), excludeDuplicates), excludeDuplicates, 91, 95, 33, 64, 123, 126);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, (constants.pwd.nrOfNumbers + constants.pwd.nrOfSymbols), excludeDuplicates), excludeDuplicates, 91, 95, 33, 64, 123, 126);
         }
 
         static getNumbers(pwdLength, excludeDuplicates) {
             let pwd = "";
-            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, Constants.nrOfNumbers, excludeDuplicates), excludeDuplicates, 48, 57);
+            return RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, constants.pwd.nrOfNumbers, excludeDuplicates), excludeDuplicates, 48, 57);
         }
 
         static getSymbols(pwdLength, excludeDuplicates) {
             let pwd = "";
-            pwd = RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, Constants.nrOfSymbols, excludeDuplicates), excludeDuplicates, 33, 63);
+            pwd = RandomNumbers.pwd(pwd, RandomNumbers.finalLenght(pwdLength, constants.pwd.nrOfSymbols, excludeDuplicates), excludeDuplicates, 33, 63);
             pwd = pwd.replaceAll(0, String.fromCharCode(64));
             pwd = pwd.replaceAll(1, String.fromCharCode(91));
             pwd = pwd.replaceAll(2, String.fromCharCode(92));

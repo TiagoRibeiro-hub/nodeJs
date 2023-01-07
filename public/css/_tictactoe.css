@@ -1,41 +1,4 @@
-.table-container {
-    display: flex;
-    justify-content: center;
-}
-
-#enemy-screen,
-#intro-screen,
-#difficulty-screen,
-#flipCoin-screen {
-    max-width: 420px;
-    text-align: center;
-    /* Centers h2 and buttons */
-}
-
-#enemy-screen h2,
-#intro-screen h2,
-#difficulty-screen h2,
-flipCoin-screen h2 {
-    padding: 0 15px;
-    /* Prevent text from touching the edges of the screen */
-}
-
-#intro-screen button {
-    font-size: 3.4em;
-    padding: 3% 6%;
-    /* With "%" padding is based on container's width */
-    margin: 0 4%;
-}
-
-#enemy-screen button,
-#difficulty-screen button,
-#flipCoin-screen button {
-    display: block;
-    margin: 0.6em auto;
-    font-size: 1.9em;
-    padding: 0.2em 0.4em;
-}
-
+@import url('./_gameInitialize.css');
 
 /****** GAME GRID ******/
 

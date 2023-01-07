@@ -4,8 +4,10 @@
         <button class="arrow-right control" aria-label="Next Image" id="next">▶</button>
         <div class="gallery-wrapper">
             <div class="gallery">
-                <% images.forEach(image => {%>
-                    <img src="<%=image %>" alt="Beach Image" class="item current-item">
+                <% options.forEach(opt => {%>
+                    <a href="<%=opt._href %>" class="item current-item">
+                        <img src="<%=opt._src %>" alt="<%=opt._name %>">
+                    </a>
                     <%})%>
             </div>
         </div>
