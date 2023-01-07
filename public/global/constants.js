@@ -7,6 +7,7 @@ const constants = function() {
 
     });
     const _game = Object.freeze({
+        The_Machine: "The Machine",
         ENEMY: "enemy",
         PLAYERS: "players",
         PLAYER_ONE: "playerOne",
@@ -20,7 +21,8 @@ const constants = function() {
         MEDIUM: "medium",
         HARD: "hard",
         HEADS: "heads",
-        TAILS: "tails"
+        TAILS: "tails",
+        GAEM_TABLE: "game"
     });
     return {
         pwd: _pwd,

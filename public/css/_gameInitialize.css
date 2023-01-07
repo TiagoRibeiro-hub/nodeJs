@@ -21,13 +21,6 @@
     /* Prevent text from touching the edges of the screen */
 }
 
-#intro-screen button {
-    font-size: 3.4em;
-    padding: 3% 6%;
-    /* With "%" padding is based on container's width */
-    margin: 0 4%;
-}
-
 #players-screen label {
     margin: 0.5em 0;
 }
@@ -36,6 +29,13 @@
     font-size: 1.5em;
     padding: 0.2em 0.4em;
     margin: 0.6em auto;
+}
+
+#intro-screen button {
+    font-size: 3.4em;
+    padding: 3% 6%;
+    /* With "%" padding is based on container's width */
+    margin: 0 4%;
 }
 
 #enemy-screen button,

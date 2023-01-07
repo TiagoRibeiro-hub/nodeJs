@@ -1,10 +1,10 @@
-<div id="enemy-screen" class="center hidden">
+<div id="enemy-screen" class="center">
     <h2>Play against:</h2>
     <button type="button" id="btn-human" class="choose">Human</button>
     <button type="button" id="btn-cpu" class="choose">CPU</button>
 </div>
 
-<div id="players-screen" class="center">
+<div id="players-screen" class="center hidden">
     <label>Player one name :</label>
     <input type="text" id="input-playerOne" class="" />
     <label id="lbl-playerTwo" class="hidden">Player two name :</label>
@@ -27,9 +27,9 @@
 
 <div id="intro-screen" class="center hidden">
     <h2 id="intro-symbol"></h2>
-    <% playersOptions.forEach(option => {%>
-        <input type="button" id="btn-player" class="choose" value="<%=option %>" />
+    <% playersOptions.forEach((option, index) => {%>
+        <button type="button" id="<%=index %>" class="choose piece" title="<%=option %>"><%=option %></button>
         <%})%>
 </div>
 
-<script type="module"></script>
+<script type="module" src="/js/gameInitialize.js"></script>
