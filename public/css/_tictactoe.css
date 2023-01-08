@@ -4,11 +4,11 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     aspect-ratio: 1 / 1;
-    width: 33vw;
+    width: 30vw;
 }
 
 .tictactoe-table>div {
-    margin: 10px;
+    margin: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,10 +22,12 @@
     border: 2px solid var(--color-white);
     cursor: pointer;
     line-height: 100px;
+    padding: 0.2em;
+    font-size: calc(100% + min(8vh, 3vw));
 }
 
 .lbl-move {
-    font-size: 60px;
+    font-size: 2em;
 }
 
 .wincell {
@@ -60,7 +62,7 @@ button {
 
 @media only screen and (max-width: 1920px) {
     .tictactoe-table {
-        width: 50vw;
+        width: 37vw;
     }
     .tictactoe-table>div {
         margin: 9px;
@@ -69,7 +71,7 @@ button {
 
 @media only screen and (max-width: 1536px) {
     .tictactoe-table {
-        width: 60vw;
+        width: 52vw;
     }
     .tictactoe-table>div {
         margin: 8px;
@@ -78,7 +80,7 @@ button {
 
 @media only screen and (max-width: 992px) {
     .tictactoe-table {
-        width: 65vw;
+        width: 57vw;
     }
     .tictactoe-table>div {
         margin: 7px;
@@ -87,7 +89,7 @@ button {
 
 @media only screen and (max-width: 768px) {
     .tictactoe-table {
-        width: 70vw;
+        width: 62vw;
     }
     .tictactoe-table>div {
         margin: 5px;
@@ -99,6 +101,6 @@ button {
         width: 80vw;
     }
     .tictactoe-table>div {
-        margin: 3px;
+        margin: 4px;
     }
 }
