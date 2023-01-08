@@ -26,8 +26,30 @@ a:hover {
     color: var(--color-white-hover) !important;
 }
 
-button:hover {
+button {
+    border-radius: 0.3em;
+}
+
+button:enabled:hover {
     background-color: var(--color-white) !important;
+}
+
+button:disabled {
+    cursor: default;
+}
+
+.required {
+    border: 2px solid red;
+}
+
+.error-msg {
+    font-family: var(--font-error-msg);
+    color: red;
+    display: flex;
+}
+
+.hidden {
+    display: none;
 }
 
 .layout-container {

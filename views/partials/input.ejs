@@ -1,0 +1,12 @@
+<% if (locals.label != null) { 
+    if(label._id != null && label._classList != null) {%>
+    <label id="<%= label._id %>" class="<%= label._classList %>"> <%= label._text %></label>
+    <% } else if(label._id == null && label._classList != null) {%>
+        <label class="<%= label._classList %>"> <%= label._text %></label>
+        <% } else {%>
+            <label> <%= label._text %></label>
+            <% }} %>
+                <% if (locals.input != null) { %>
+                    <input type="<%= input._type %>" id="<%= input._id %>" class="<%= input._classList %>" data-validation="invalid" title="<%= input._title %>" />
+                    <span id="error-<%= input._id %>" class="error-msg hidden"><%= span._text %></span>
+                    <% } %>

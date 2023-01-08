@@ -8,11 +8,11 @@ const helper = function() {
         const result = _randomNumber(1, 2);
         return result % 2 == 0 ? constants.game.HEADS : constants.game.TAILS;
     };
-    let _toggle = function(element) {
-        if (element.classList.contains('hidden')) {
-            element.classList.remove('hidden')
+    let _toggle = function(element, className) {
+        if (element.classList.contains(className)) {
+            element.classList.remove(className)
         } else {
-            element.classList.add('hidden')
+            element.classList.add(className)
         }
     };
     return {

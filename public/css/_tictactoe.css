@@ -44,11 +44,6 @@ button {
     display: block;
 }
 
-.choose,
-#restart {
-    border-radius: 0.3em;
-}
-
 .choose:active,
 #restart:active {
     background-color: rgb(126, 126, 126);
@@ -57,10 +52,6 @@ button {
 
 .center {
     margin: 0 auto;
-}
-
-.hidden {
-    display: none;
 }
 
 .cannotuse {

@@ -1,4 +1,8 @@
 const constants = function() {
+    const _regExp = Object.freeze({
+        email: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        userName: /^[a-zA-ZãáàéêíóõúçÃÁÀÉÊÍÓÕÚÇ0-9._\-!@\s]+$/
+    });
     const _pwd = Object.freeze({
         nrOfLetters: 26,
         nrOfNumbers: 10,
@@ -25,6 +29,7 @@ const constants = function() {
         GAME_TABLE: "game"
     });
     return {
+        regExp: _regExp,
         pwd: _pwd,
         game: _game
     }

@@ -20,10 +20,7 @@ nav {
     border: 3px solid white
 }
 
-
-/* .navbar-brand {
-    background-image: url('./../files/node.png');
-    display: block;
-    width: 100px;
-    height: 50px;
-} */
+.github {
+    font-size: 25px !important;
+    text-decoration: underline;
+}

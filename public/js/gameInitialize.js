@@ -1,5 +1,6 @@
 import constants from "../global/constants.js";
 import helper from "../global/helper.js";
+import validation from "../global/validations.js";
 import { Game, Player } from "../models/game-model.js";
 // screens
 const enemyScreen = document.getElementById('enemy-screen');
@@ -8,6 +9,7 @@ const difficultyScreen = document.getElementById('difficulty-screen');
 const flipCoinScreen = document.getElementById('flipCoin-screen');
 const introScreen = document.getElementById('intro-screen');
 // buttons
+const goBackBtn = document.getElementById('go-back');
 const humanBtn = document.getElementById('btn-human');
 const cpuBtn = document.getElementById('btn-cpu');
 const saveBtn = document.getElementById('btn-save');
@@ -15,7 +17,8 @@ const flipCoinBtns = document.querySelectorAll(".flipCoin");
 // inputs
 const inputPlayerOne = document.getElementById('input-playerOne');
 const inputPlayerTwo = document.getElementById('input-playerTwo');
-
+// all
+const pieceBtns = document.querySelectorAll(".piece");
 
 
 var game = new Game();
@@ -23,38 +26,39 @@ var game = new Game();
 function toggleHideAndShow(screen) {
     switch (screen) {
         case constants.game.ENEMY:
-            helper.toggle(enemyScreen);
+            helper.toggle(enemyScreen, 'hidden');
             break;
         case constants.game.PLAYERS:
-            helper.toggle(playersScreen);
+            helper.toggle(playersScreen, 'hidden');
             break;
         case constants.game.DIFFICULTY:
-            helper.toggle(difficultyScreen);
+            helper.toggle(difficultyScreen, 'hidden');
             break;
         case constants.game.FILPCOIN:
-            helper.toggle(flipCoinScreen);
+            helper.toggle(flipCoinScreen, 'hidden');
             break;
         case constants.game.INTRO:
-            helper.toggle(introScreen);
+            helper.toggle(introScreen, 'hidden');
             break;
         case constants.game.GAME_TABLE:
-            helper.toggle(document.getElementById('game-screen'));
+            helper.toggle(document.getElementById('game-screen'), 'hidden');
             break;
     }
 };
 
-
 humanBtn.addEventListener('click', function() {
     toggleHideAndShow(constants.game.ENEMY);
     game.setEnemy = constants.game.HUMAN;
-    helper.toggle(document.getElementById('lbl-playerTwo'));
-    helper.toggle(inputPlayerTwo);
+    helper.toggle(document.getElementById('lbl-playerTwo'), 'hidden');
+    helper.toggle(inputPlayerTwo, 'hidden');
+    helper.toggle(goBackBtn, 'hidden');
     toggleHideAndShow(constants.game.PLAYERS);
 });
 
 cpuBtn.addEventListener('click', function() {
     toggleHideAndShow(constants.game.ENEMY);
     game.setEnemy = constants.game.CPU;
+    helper.toggle(goBackBtn, 'hidden');
     toggleHideAndShow(constants.game.PLAYERS);
 });
 
@@ -120,7 +124,6 @@ flipCoinBtns.forEach((btn) => {
     });
 });
 
-const pieceBtns = document.querySelectorAll(".piece");
 pieceBtns.forEach((btn) => {
     btn.addEventListener("click", function(e) {
         const target = e.target;
@@ -134,6 +137,7 @@ pieceBtns.forEach((btn) => {
         }
         toggleHideAndShow(constants.game.INTRO);
         toggleHideAndShow(constants.game.GAME_TABLE);
+        helper.toggle(goBackBtn, 'hidden');
 
         function setPiece(index) {
             if (game._startingPlayer == game._playerOne._name) {
@@ -145,6 +149,43 @@ pieceBtns.forEach((btn) => {
             }
         }
     });
+});
+
+inputPlayerOne.addEventListener('blur', function(e) {
+    const target = e.target;
+    if (!validation.isValid(target.value)) {
+        target.classList.add('required');
+        target.focus();
+    } else {
+        target.classList.remove('required');
+        target.setAttribute("data-validation", "valid");
+        if (game._enemy === constants.game.CPU) {
+            saveBtn.disabled = false;
+        } else {
+            if (inputPlayerTwo.getAttribute("data-validation") === "invalid") {
+                inputPlayerTwo.focus();
+            } else {
+                saveBtn.disabled = false;
+            }
+        }
+    }
+    validation.setErrorMsg(target);
+});
+
+inputPlayerTwo.addEventListener('blur', function(e) {
+    const target = e.target;
+    if (!validation.isValid(target.value)) {
+        target.classList.add('required');
+        target.focus();
+    } else {
+        target.setAttribute("data-validation", "valid");
+        if (inputPlayerOne.getAttribute("data-validation") === "valid") {
+            saveBtn.disabled = false
+        } else {
+            inputPlayerOne.classList.add('required');
+        }
+    }
+    validation.setErrorMsg(target);
 });
 
 export default game;

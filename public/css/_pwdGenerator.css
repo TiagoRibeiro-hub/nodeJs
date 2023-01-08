@@ -24,3 +24,7 @@ input.pwd-length:focus {
 #setPwd {
     width: 100px;
 }
+
+#lbl-error {
+    font-family: var(--font-error-msg);
+}

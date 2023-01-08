@@ -3,6 +3,25 @@
     justify-content: center;
 }
 
+.game-initialize {
+    position: relative;
+}
+
+#go-back {
+    background-color: transparent !important;
+    border: 1px solid;
+    color: var(--color-white);
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    bottom: -1.5em;
+}
+
+#go-back:enabled:hover {
+    background-color: transparent !important;
+    color: var(--color-white-hover)
+}
+
 #enemy-screen,
 #intro-screen,
 #difficulty-screen,
@@ -10,7 +29,6 @@
 #players-screen {
     max-width: 420px;
     text-align: center;
-    /* Centers h2 and buttons */
 }
 
 #enemy-screen h2,
@@ -34,7 +52,6 @@
 #intro-screen button {
     font-size: 3.4em;
     padding: 3% 6%;
-    /* With "%" padding is based on container's width */
     margin: 0 4%;
 }
 
