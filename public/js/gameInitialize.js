@@ -18,11 +18,9 @@ const flipCoinBtns = document.querySelectorAll(".flipCoin");
 const inputPlayerOne = document.getElementById('input-playerOne');
 const inputPlayerTwo = document.getElementById('input-playerTwo');
 // all
+const difficultyBtns = document.querySelectorAll(".difficulty");
 const pieceBtns = document.querySelectorAll(".piece");
-
-
-var game = new Game();
-
+// functions
 function toggleHideAndShow(screen) {
     switch (screen) {
         case constants.game.ENEMY:
@@ -46,20 +44,26 @@ function toggleHideAndShow(screen) {
     }
 };
 
-humanBtn.addEventListener('click', function() {
+function setEnemy() {
     toggleHideAndShow(constants.game.ENEMY);
+    helper.toggle(goBackBtn, 'hidden');
+    toggleHideAndShow(constants.game.PLAYERS);
+    goBackBtn.setAttribute("data-screen", constants.game.PLAYERS);
+    goBackBtn.setAttribute("data-previous-screen", constants.game.ENEMY);
+}
+// set Game
+var game = new Game();
+// events
+humanBtn.addEventListener('click', function() {
+    setEnemy();
     game.setEnemy = constants.game.HUMAN;
     helper.toggle(document.getElementById('lbl-playerTwo'), 'hidden');
     helper.toggle(inputPlayerTwo, 'hidden');
-    helper.toggle(goBackBtn, 'hidden');
-    toggleHideAndShow(constants.game.PLAYERS);
 });
 
 cpuBtn.addEventListener('click', function() {
-    toggleHideAndShow(constants.game.ENEMY);
+    setEnemy();
     game.setEnemy = constants.game.CPU;
-    helper.toggle(goBackBtn, 'hidden');
-    toggleHideAndShow(constants.game.PLAYERS);
 });
 
 saveBtn.addEventListener('click', function() {
@@ -71,30 +75,36 @@ saveBtn.addEventListener('click', function() {
     }
 
     toggleHideAndShow(constants.game.PLAYERS);
+
     if (game._enemy === constants.game.CPU) {
-        const difficultyBtns = document.querySelectorAll(".difficulty");
-        difficultyBtns.forEach((btn) => {
-            btn.addEventListener("click", function(e) {
-                const target = e.target;
-                switch (target.id) {
-                    case constants.game.EASY:
-                        game.setDifficulty = constants.game.EASY;
-                        break;
-                    case constants.game.MEDIUM:
-                        game.setDifficulty = constants.game.MEDIUM;
-                        break;
-                    case constants.game.DIFFICULTY:
-                        game.setDifficulty = constants.game.DIFFICULTY;
-                        break;
-                }
-                toggleHideAndShow(constants.game.DIFFICULTY);
-                toggleHideAndShow(constants.game.FILPCOIN);
-            });
-        });
         toggleHideAndShow(constants.game.DIFFICULTY);
+        goBackBtn.setAttribute("data-screen", constants.game.DIFFICULTY);
     } else {
         toggleHideAndShow(constants.game.FILPCOIN);
+        goBackBtn.setAttribute("data-screen", constants.game.FILPCOIN);
     }
+    goBackBtn.setAttribute("data-previous-screen", constants.game.PLAYERS);
+});
+
+difficultyBtns.forEach((btn) => {
+    btn.addEventListener("click", function(e) {
+        const target = e.target;
+        switch (target.id) {
+            case constants.game.EASY:
+                game.setDifficulty = constants.game.EASY;
+                break;
+            case constants.game.MEDIUM:
+                game.setDifficulty = constants.game.MEDIUM;
+                break;
+            case constants.game.DIFFICULTY:
+                game.setDifficulty = constants.game.DIFFICULTY;
+                break;
+        }
+        toggleHideAndShow(constants.game.DIFFICULTY);
+        toggleHideAndShow(constants.game.FILPCOIN);
+        goBackBtn.setAttribute("data-previous-screen", constants.game.DIFFICULTY);
+        goBackBtn.setAttribute("data-screen", constants.game.FILPCOIN);
+    });
 });
 
 flipCoinBtns.forEach((btn) => {
@@ -121,6 +131,8 @@ flipCoinBtns.forEach((btn) => {
         }
         toggleHideAndShow(constants.game.FILPCOIN);
         toggleHideAndShow(constants.game.INTRO);
+        goBackBtn.setAttribute("data-previous-screen", constants.game.FILPCOIN);
+        goBackBtn.setAttribute("data-screen", constants.game.INTRO);
     });
 });
 
@@ -188,4 +200,33 @@ inputPlayerTwo.addEventListener('blur', function(e) {
     validation.setErrorMsg(target);
 });
 
+goBackBtn.addEventListener('click', function(e) {
+    const thisScreen = e.target.getAttribute("data-screen");
+    const previousScreen = e.target.getAttribute("data-previous-screen");
+    toggleHideAndShow(thisScreen);
+    toggleHideAndShow(previousScreen);
+    switch (previousScreen) {
+        case constants.game.ENEMY:
+            helper.toggle(goBackBtn, 'hidden');
+            document.getElementById('lbl-playerTwo').classList.add("hidden");
+            inputPlayerTwo.classList.add("hidden");
+            break;
+        case constants.game.PLAYERS:
+            goBackBtn.setAttribute("data-screen", constants.game.PLAYERS);
+            goBackBtn.setAttribute("data-previous-screen", constants.game.ENEMY);
+            break;
+        case constants.game.DIFFICULTY:
+            goBackBtn.setAttribute("data-screen", constants.game.DIFFICULTY);
+            goBackBtn.setAttribute("data-previous-screen", constants.game.PLAYERS);
+            break;
+        case constants.game.FILPCOIN:
+            goBackBtn.setAttribute("data-screen", constants.game.FILPCOIN);
+            if (game._enemy === constants.game.CPU) {
+                goBackBtn.setAttribute("data-previous-screen", constants.game.DIFFICULTY);
+            } else {
+                goBackBtn.setAttribute("data-previous-screen", constants.game.PLAYERS);
+            }
+            break;
+    }
+});
 export default game;
