@@ -67,6 +67,7 @@ cpuBtn.addEventListener('click', function() {
 });
 
 saveBtn.addEventListener('click', function() {
+
     game._playerOne = new Player(inputPlayerOne.value);
     if (game._enemy === constants.game.HUMAN) {
         game._playerTwo = new Player(inputPlayerTwo.value);
@@ -229,4 +230,10 @@ goBackBtn.addEventListener('click', function(e) {
             break;
     }
 });
+
+document.addEventListener('keyup', function(e) {
+    if (document.activeElement == inputPlayerOne || document.activeElement == inputPlayerTwo) {
+        saveBtn.disabled = true;
+    }
+})
 export default game;
