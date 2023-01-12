@@ -14,6 +14,7 @@ const humanBtn = document.getElementById('btn-human');
 const cpuBtn = document.getElementById('btn-cpu');
 const saveBtn = document.getElementById('btn-save');
 const flipCoinBtns = document.querySelectorAll(".flipCoin");
+
 // inputs
 const inputPlayerOne = document.getElementById('input-playerOne');
 const inputPlayerTwo = document.getElementById('input-playerTwo');
@@ -164,43 +165,6 @@ pieceBtns.forEach((btn) => {
     });
 });
 
-inputPlayerOne.addEventListener('blur', function(e) {
-    const target = e.target;
-    if (!validation.isValid(target.value)) {
-        target.classList.add('required');
-        target.focus();
-    } else {
-        target.classList.remove('required');
-        target.setAttribute("data-validation", "valid");
-        if (game._enemy === constants.game.CPU) {
-            saveBtn.disabled = false;
-        } else {
-            if (inputPlayerTwo.getAttribute("data-validation") === "invalid") {
-                inputPlayerTwo.focus();
-            } else {
-                saveBtn.disabled = false;
-            }
-        }
-    }
-    validation.setErrorMsg(target);
-});
-
-inputPlayerTwo.addEventListener('blur', function(e) {
-    const target = e.target;
-    if (!validation.isValid(target.value)) {
-        target.classList.add('required');
-        target.focus();
-    } else {
-        target.setAttribute("data-validation", "valid");
-        if (inputPlayerOne.getAttribute("data-validation") === "valid") {
-            saveBtn.disabled = false
-        } else {
-            inputPlayerOne.classList.add('required');
-        }
-    }
-    validation.setErrorMsg(target);
-});
-
 goBackBtn.addEventListener('click', function(e) {
     const thisScreen = e.target.getAttribute("data-screen");
     const previousScreen = e.target.getAttribute("data-previous-screen");
@@ -211,6 +175,8 @@ goBackBtn.addEventListener('click', function(e) {
             helper.toggle(goBackBtn, 'hidden');
             document.getElementById('lbl-playerTwo').classList.add("hidden");
             inputPlayerTwo.classList.add("hidden");
+            inputPlayerOne.classList.remove('required');
+            inputPlayerTwo.classList.remove('required');
             break;
         case constants.game.PLAYERS:
             goBackBtn.setAttribute("data-screen", constants.game.PLAYERS);
@@ -232,8 +198,46 @@ goBackBtn.addEventListener('click', function(e) {
 });
 
 document.addEventListener('keyup', function(e) {
+    const target = e.target;
     if (document.activeElement == inputPlayerOne || document.activeElement == inputPlayerTwo) {
         saveBtn.disabled = true;
     }
-})
+    switch (target.id) {
+        case "input-playerOne":
+            if (!validation.isValid(target.value)) {
+                target.classList.add('required');
+                target.focus();
+            } else {
+                target.classList.remove('required');
+                target.setAttribute("data-validation", "valid");
+                if (game._enemy === constants.game.CPU) {
+                    saveBtn.disabled = false;
+                } else {
+                    if (inputPlayerTwo.getAttribute("data-validation") === "invalid") {
+                        inputPlayerTwo.focus();
+                    } else {
+                        saveBtn.disabled = false;
+                    }
+                }
+            }
+            validation.setErrorMsg(target);
+            break;
+        case "input-playerTwo":
+            if (!validation.isValid(target.value)) {
+                target.classList.add('required');
+                target.focus();
+            } else {
+                target.classList.remove('required');
+                target.setAttribute("data-validation", "valid");
+                if (inputPlayerOne.getAttribute("data-validation") === "valid") {
+                    saveBtn.disabled = false
+                } else {
+                    inputPlayerOne.classList.add('required');
+                }
+            }
+            validation.setErrorMsg(target);
+            break;
+    }
+});
+
 export default game;

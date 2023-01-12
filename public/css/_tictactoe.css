@@ -1,10 +1,32 @@
 @import url('./_gameInitialize.css');
+.game-board {
+    margin-bottom: 1rem;
+    word-break: break-all;
+    text-align: center;
+}
+
+#board-info {
+    font-size: 1.3em;
+    border-radius: 0.3em;
+    padding: 0.5em;
+}
+
+#player-piece {
+    color: yellow;
+    font-size: 1.5em;
+}
+
+.tictactoe-table-container {
+    display: flex;
+    justify-content: center;
+}
+
 .tictactoe-table {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     aspect-ratio: 1 / 1;
-    width: 30vw;
+    width: 650px;
 }
 
 .tictactoe-table>div {
@@ -41,7 +63,7 @@ button {
 }
 
 #restart {
-    font-size: 1.2em;
+    font-size: 1.5em;
     padding: 5px 10px;
     margin: 20px auto;
     display: block;
@@ -60,36 +82,9 @@ button {
     cursor: not-allowed;
 }
 
-@media only screen and (max-width: 1920px) {
-    .tictactoe-table {
-        width: 37vw;
-    }
-    .tictactoe-table>div {
-        margin: 9px;
-    }
-}
-
-@media only screen and (max-width: 1536px) {
-    .tictactoe-table {
-        width: 52vw;
-    }
-    .tictactoe-table>div {
-        margin: 8px;
-    }
-}
-
-@media only screen and (max-width: 992px) {
-    .tictactoe-table {
-        width: 57vw;
-    }
-    .tictactoe-table>div {
-        margin: 7px;
-    }
-}
-
 @media only screen and (max-width: 768px) {
     .tictactoe-table {
-        width: 62vw;
+        width: 75vw;
     }
     .tictactoe-table>div {
         margin: 5px;
@@ -101,6 +96,6 @@ button {
         width: 80vw;
     }
     .tictactoe-table>div {
-        margin: 4px;
+        margin: 3px;
     }
 }

@@ -1,10 +1,11 @@
 nav {
-    margin-top: 0.5rem;
+    margin-top: 0;
     background: linear-gradient((to right, var(--color-dark-blue), var(--color-light-blue)));
     background: -moz-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
     background: -webkit-linear-gradient(right, var(--color-dark-blue), var(--color-light-blue));
     background: -webkit-gradient(linear, right top, left top, from(var(--color-dark-blue)), to(var(--color-light-blue)));
     border-bottom: 1px solid var(--color-white);
+    z-index: 20;
 }
 
 .nav-link {

@@ -6,6 +6,7 @@
 @import url('./_carousel.css');
 @import url('./_tictactoe.css');
 @import url('./_toast.css');
+@import url('./_loader.css');
 body {
     font-family: var(--font-freshman);
     font-size: 20px;

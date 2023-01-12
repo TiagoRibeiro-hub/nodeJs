@@ -8,7 +8,7 @@ export class Player {
     }
 
     set setPiece(value) {
-        this.piece = value;
+        this._piece = value;
     }
 
 }

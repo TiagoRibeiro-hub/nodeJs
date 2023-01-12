@@ -1,14 +1,21 @@
 <%- include('../partials/title.ejs') %>
     <div class="table-container">
-        <div id="game-screen" class="center">
-            <div class="tictactoe-table">
-                <% if (locals.gameTable != null) { %>
-                    <% gameTable.forEach((cell) => {%>
-                        <div id="cell-<%=cell %>" class="cell"><label id="lbl-<%=cell %>" class="lbl-move"></label></div>
-                        <%})%>
-                            <% } %>
+        <div id="game-screen" class="center hidden">
+            <div class="game-board">
+                <label id="board-info"></label><span id="player-piece"></span>
+            </div>
+            <div class="tictactoe-table-container">
+                <div class="tictactoe-table">
+                    <% if (locals.gameTable != null) { %>
+                        <% gameTable.forEach((cell) => {%>
+                            <div id="cell-<%=cell %>" class="cell"><label id="lbl-<%=cell %>" class="lbl-move"></label></div>
+                            <%})%>
+                                <% } %>
+                </div>
             </div>
             <button type="button" id="restart">Restart</button>
         </div>
-        <!-- <%- include('../partials/gameInitialize.ejs') %> -->
+        <%- include('../partials/gameInitialize.ejs') %>
     </div>
+
+    <script type="module" src="/js/tictactoe.js"></script>
