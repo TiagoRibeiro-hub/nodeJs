@@ -21,12 +21,12 @@
     font-size: 1.5em;
 }
 
-.tictactoe-table-container {
+.tictactoe-board-container {
     display: flex;
     justify-content: center;
 }
 
-.tictactoe-table {
+.tictactoe-board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -34,7 +34,7 @@
     width: var(--cell-size);
 }
 
-.tictactoe-table>div {
+.tictactoe-board>div {
     margin: 8px;
     display: flex;
     align-items: center;
@@ -60,19 +60,19 @@
 .cell.x::before,
 .cell.x::after,
 .cell.circle::before {
-    background-color: black;
+    background-color: var(--color-white);
 }
 
-.board.x .cell:not(.x):not(.circle):hover::before,
-.board.x .cell:not(.x):not(.circle):hover::after,
-.board.circle .cell:not(.x):not(.circle):hover::before {
-    background-color: lightgrey;
+.tictactoe-board.x .cell:not(.x):not(.circle):hover::before,
+.tictactoe-board.x .cell:not(.x):not(.circle):hover::after,
+.tictactoe-board.circle .cell:not(.x):not(.circle):hover::before {
+    background-color: rgb(126, 126, 126);
 }
 
 .cell.x::before,
 .cell.x::after,
-.board.x .cell:not(.x):not(.circle):hover::before,
-.board.x .cell:not(.x):not(.circle):hover::after {
+.tictactoe-board.x .cell:not(.x):not(.circle):hover::before,
+.tictactoe-board.x .cell:not(.x):not(.circle):hover::after {
     content: '';
     position: absolute;
     width: calc(var(--mark-size) * .15);
@@ -80,32 +80,32 @@
 }
 
 .cell.x::before,
-.board.x .cell:not(.x):not(.circle):hover::before {
+.tictactoe-board.x .cell:not(.x):not(.circle):hover::before {
     transform: rotate(45deg);
 }
 
 .cell.x::after,
-.board.x .cell:not(.x):not(.circle):hover::after {
+.tictactoe-board.x .cell:not(.x):not(.circle):hover::after {
     transform: rotate(-45deg);
 }
 
 .cell.circle::before,
 .cell.circle::after,
-.board.circle .cell:not(.x):not(.circle):hover::before,
-.board.circle .cell:not(.x):not(.circle):hover::after {
+.tictactoe-board.circle .cell:not(.x):not(.circle):hover::before,
+.tictactoe-board.circle .cell:not(.x):not(.circle):hover::after {
     content: '';
     position: absolute;
     border-radius: 50%;
 }
 
 .cell.circle::before,
-.board.circle .cell:not(.x):not(.circle):hover::before {
+.tictactoe-board.circle .cell:not(.x):not(.circle):hover::before {
     width: var(--mark-size);
     height: var(--mark-size);
 }
 
 .cell.circle::after,
-.board.circle .cell:not(.x):not(.circle):hover::after {
+.tictactoe-board.circle .cell:not(.x):not(.circle):hover::after {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) * .7);
     background-color: #002c42;
@@ -138,7 +138,7 @@ button {
 }
 
 @media only screen and (max-width: 768px) {
-    .tictactoe-table>div {
+    .tictactoe-board>div {
         margin: 5px;
     }
      :root {
@@ -147,7 +147,7 @@ button {
 }
 
 @media only screen and (max-width: 576px) {
-    .tictactoe-table>div {
+    .tictactoe-board>div {
         margin: 3px;
     }
      :root {

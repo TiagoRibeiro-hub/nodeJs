@@ -4,11 +4,11 @@
             <div class="game-board">
                 <label id="board-info"></label><span id="player-piece"></span>
             </div>
-            <div class="tictactoe-table-container">
-                <div class="tictactoe-table">
+            <div class="tictactoe-board-container">
+                <div class="tictactoe-board">
                     <% if (locals.gameTable != null) { %>
                         <% gameTable.forEach((cell) => {%>
-                            <div id="cell-<%=cell %>" class="cell circle"><label id="lbl-<%=cell %>" class="lbl-move"></label></div>
+                            <div id="cell-<%=cell %>" class="cell"><label id="lbl-<%=cell %>" class="lbl-move"></label></div>
                             <%})%>
                                 <% } %>
                 </div>
