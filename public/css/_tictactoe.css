@@ -1,4 +1,9 @@
 @import url('./_gameInitialize.css');
+:root {
+    --cell-size: 650px;
+    --mark-size: calc(var(--cell-size) * .25);
+}
+
 .game-board {
     margin-bottom: 1rem;
     word-break: break-all;
@@ -26,7 +31,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     aspect-ratio: 1 / 1;
-    width: 650px;
+    width: var(--cell-size);
 }
 
 .tictactoe-table>div {
@@ -45,11 +50,65 @@
     cursor: pointer;
     line-height: 100px;
     padding: 0.2em;
-    font-size: calc(100% + 50px);
 }
 
-.lbl-move {
-    font-size: 2em;
+.cell.x,
+.cell.circle {
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.cell.circle::before {
+    background-color: black;
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    background-color: lightgrey;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .15);
+    height: var(--mark-size);
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.cell.circle::before,
+.board.circle .cell:not(.x):not(.circle):hover::before {
+    width: var(--mark-size);
+    height: var(--mark-size);
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after {
+    width: calc(var(--mark-size) * .7);
+    height: calc(var(--mark-size) * .7);
+    background-color: #002c42;
 }
 
 .wincell {
@@ -78,30 +137,20 @@ button {
     margin: 0 auto;
 }
 
-.cannotuse {
-    cursor: not-allowed;
-}
-
 @media only screen and (max-width: 768px) {
-    .tictactoe-table {
-        width: 75vw;
-    }
     .tictactoe-table>div {
         margin: 5px;
     }
-    .cell {
-        font-size: calc(100% + 30px);
+     :root {
+        --cell-size: 75vw;
     }
 }
 
 @media only screen and (max-width: 576px) {
-    .tictactoe-table {
-        width: 80vw;
-    }
     .tictactoe-table>div {
         margin: 3px;
     }
-    .cell {
-        font-size: calc(100% + 10px);
+     :root {
+        --cell-size: 80vw;
     }
 }

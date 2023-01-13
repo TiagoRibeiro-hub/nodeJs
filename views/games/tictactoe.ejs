@@ -8,8 +8,7 @@
                 <div class="tictactoe-table">
                     <% if (locals.gameTable != null) { %>
                         <% gameTable.forEach((cell) => {%>
-                            <!-- <div id="cell-<%=cell %>" class="cell"><label id="lbl-<%=cell %>" class="lbl-move">X</label></div> -->
-                            <div id="cell-<%=cell %> x" class="cell"></div>
+                            <div id="cell-<%=cell %>" class="cell circle"><label id="lbl-<%=cell %>" class="lbl-move"></label></div>
                             <%})%>
                                 <% } %>
                 </div>
