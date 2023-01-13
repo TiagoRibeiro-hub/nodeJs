@@ -1,6 +1,6 @@
 <%- include('../partials/title.ejs') %>
     <div class="table-container">
-        <div id="game-screen" class="center hidden">
+        <div id="game-screen" class="center">
             <div class="game-board">
                 <label id="board-info"></label><span id="player-piece"></span>
             </div>
@@ -8,7 +8,8 @@
                 <div class="tictactoe-table">
                     <% if (locals.gameTable != null) { %>
                         <% gameTable.forEach((cell) => {%>
-                            <div id="cell-<%=cell %>" class="cell"><label id="lbl-<%=cell %>" class="lbl-move"></label></div>
+                            <!-- <div id="cell-<%=cell %>" class="cell"><label id="lbl-<%=cell %>" class="lbl-move">X</label></div> -->
+                            <div id="cell-<%=cell %> x" class="cell"></div>
                             <%})%>
                                 <% } %>
                 </div>

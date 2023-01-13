@@ -2,12 +2,7 @@ import constants from "../global/constants.js";
 import helper from "../global/helper.js";
 import validation from "../global/validations.js";
 import { Game, Player } from "../models/game-model.js";
-// screens
-const enemyScreen = document.getElementById('enemy-screen');
-const playersScreen = document.getElementById('players-screen');
-const difficultyScreen = document.getElementById('difficulty-screen');
-const flipCoinScreen = document.getElementById('flipCoin-screen');
-const introScreen = document.getElementById('intro-screen');
+import loader from "./loader.js";
 // buttons
 const goBackBtn = document.getElementById('go-back');
 const humanBtn = document.getElementById('btn-human');
@@ -22,33 +17,10 @@ const inputPlayerTwo = document.getElementById('input-playerTwo');
 const difficultyBtns = document.querySelectorAll(".difficulty");
 const pieceBtns = document.querySelectorAll(".piece");
 // functions
-function toggleHideAndShow(screen) {
-    switch (screen) {
-        case constants.game.ENEMY:
-            helper.toggle(enemyScreen, 'hidden');
-            break;
-        case constants.game.PLAYERS:
-            helper.toggle(playersScreen, 'hidden');
-            break;
-        case constants.game.DIFFICULTY:
-            helper.toggle(difficultyScreen, 'hidden');
-            break;
-        case constants.game.FILPCOIN:
-            helper.toggle(flipCoinScreen, 'hidden');
-            break;
-        case constants.game.INTRO:
-            helper.toggle(introScreen, 'hidden');
-            break;
-        case constants.game.GAME_TABLE:
-            helper.toggle(document.getElementById('game-screen'), 'hidden');
-            break;
-    }
-};
-
 function setEnemy() {
-    toggleHideAndShow(constants.game.ENEMY);
+    helper.toggleHideAndShow(constants.game.ENEMY);
     helper.toggle(goBackBtn, 'hidden');
-    toggleHideAndShow(constants.game.PLAYERS);
+    helper.toggleHideAndShow(constants.game.PLAYERS);
     goBackBtn.setAttribute("data-screen", constants.game.PLAYERS);
     goBackBtn.setAttribute("data-previous-screen", constants.game.ENEMY);
 }
@@ -76,13 +48,13 @@ saveBtn.addEventListener('click', function() {
         game._playerTwo = new Player(constants.game.The_Machine);
     }
 
-    toggleHideAndShow(constants.game.PLAYERS);
+    helper.toggleHideAndShow(constants.game.PLAYERS);
 
     if (game._enemy === constants.game.CPU) {
-        toggleHideAndShow(constants.game.DIFFICULTY);
+        helper.toggleHideAndShow(constants.game.DIFFICULTY);
         goBackBtn.setAttribute("data-screen", constants.game.DIFFICULTY);
     } else {
-        toggleHideAndShow(constants.game.FILPCOIN);
+        helper.toggleHideAndShow(constants.game.FILPCOIN);
         goBackBtn.setAttribute("data-screen", constants.game.FILPCOIN);
     }
     goBackBtn.setAttribute("data-previous-screen", constants.game.PLAYERS);
@@ -102,8 +74,8 @@ difficultyBtns.forEach((btn) => {
                 game.setDifficulty = constants.game.DIFFICULTY;
                 break;
         }
-        toggleHideAndShow(constants.game.DIFFICULTY);
-        toggleHideAndShow(constants.game.FILPCOIN);
+        helper.toggleHideAndShow(constants.game.DIFFICULTY);
+        helper.toggleHideAndShow(constants.game.FILPCOIN);
         goBackBtn.setAttribute("data-previous-screen", constants.game.DIFFICULTY);
         goBackBtn.setAttribute("data-screen", constants.game.FILPCOIN);
     });
@@ -131,8 +103,8 @@ flipCoinBtns.forEach((btn) => {
             game.setStartingPlayer = game._playerTwo._name;
             introSymbol.textContent = "Choose your symbol " + game._playerTwo._name + " :"
         }
-        toggleHideAndShow(constants.game.FILPCOIN);
-        toggleHideAndShow(constants.game.INTRO);
+        helper.toggleHideAndShow(constants.game.FILPCOIN);
+        helper.toggleHideAndShow(constants.game.INTRO);
         goBackBtn.setAttribute("data-previous-screen", constants.game.FILPCOIN);
         goBackBtn.setAttribute("data-screen", constants.game.INTRO);
     });
@@ -140,6 +112,7 @@ flipCoinBtns.forEach((btn) => {
 
 pieceBtns.forEach((btn) => {
     btn.addEventListener("click", function(e) {
+        loader.addLoader();
         const target = e.target;
         switch (e.target.id) {
             case "0":
@@ -149,8 +122,8 @@ pieceBtns.forEach((btn) => {
                 setPiece(0);
                 break;
         }
-        toggleHideAndShow(constants.game.INTRO);
-        toggleHideAndShow(constants.game.GAME_TABLE);
+        helper.toggleHideAndShow(constants.game.INTRO);
+        helper.toggleHideAndShow(constants.game.GAME_TABLE);
         helper.toggle(goBackBtn, 'hidden');
 
         function setPiece(index) {
@@ -168,8 +141,8 @@ pieceBtns.forEach((btn) => {
 goBackBtn.addEventListener('click', function(e) {
     const thisScreen = e.target.getAttribute("data-screen");
     const previousScreen = e.target.getAttribute("data-previous-screen");
-    toggleHideAndShow(thisScreen);
-    toggleHideAndShow(previousScreen);
+    helper.toggleHideAndShow(thisScreen);
+    helper.toggleHideAndShow(previousScreen);
     switch (previousScreen) {
         case constants.game.ENEMY:
             helper.toggle(goBackBtn, 'hidden');
@@ -239,5 +212,6 @@ document.addEventListener('keyup', function(e) {
             break;
     }
 });
+
 
 export default game;

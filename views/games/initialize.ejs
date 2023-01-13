@@ -1,0 +1,44 @@
+<%- include('../partials/title.ejs') %>
+    <div class="table-container">
+        <div class="game-initialize">
+            <button id="go-back" class="hidden" data-previous-screen="" data-screen="">◀◀</button>
+
+            <div id="enemy-screen" class="center">
+                <h2>Play against:</h2>
+                <button type="button" id="btn-human" class="choose">Human</button>
+                <button type="button" id="btn-cpu" class="choose">CPU</button>
+            </div>
+
+            <div id="players-screen" class="center hidden">
+                <% inputs.forEach((element) => {%>
+                    <%- include('../partials/input.ejs', {
+                    label: element.label,
+                    input: element.input,
+                    span: element.span
+                }) %>
+                        <%})%>
+                            <button type="button" id="btn-save" class="choose" disabled>Save</button>
+            </div>
+
+            <div id="difficulty-screen" class="center hidden">
+                <h2>Difficulty:</h2>
+                <button type="button" id="easy" class="choose difficulty">Easy</button>
+                <button type="button" id="medium" class="choose difficulty">Medium</button>
+                <button type="button" id="hard" class="choose difficulty">Hard</button>
+            </div>
+
+            <div id="flipCoin-screen" class="center hidden">
+                <h2>Filp the coin, player one choose :</h2>
+                <button type="button" id="heads" class="choose flipCoin">Heads</button>
+                <button type="button" id="tails" class="choose flipCoin">Tails</button>
+            </div>
+
+            <div id="intro-screen" class="center hidden">
+                <h2 id="intro-symbol"></h2>
+                <% playersOptions.forEach((option, index) => {%>
+                    <button type="button" id="<%=index %>" class="choose piece" title="<%=option %>"><%=option %></button>
+                    <%})%>
+            </div>
+        </div>
+        <script type="module" src="/js/gameInitialize.js"></script>
+    </div>

@@ -45,7 +45,7 @@
     cursor: pointer;
     line-height: 100px;
     padding: 0.2em;
-    font-size: calc(100% + min(8vh, 3vw));
+    font-size: calc(100% + 50px);
 }
 
 .lbl-move {
@@ -89,6 +89,9 @@ button {
     .tictactoe-table>div {
         margin: 5px;
     }
+    .cell {
+        font-size: calc(100% + 30px);
+    }
 }
 
 @media only screen and (max-width: 576px) {
@@ -97,5 +100,8 @@ button {
     }
     .tictactoe-table>div {
         margin: 3px;
+    }
+    .cell {
+        font-size: calc(100% + 10px);
     }
 }
