@@ -47,9 +47,14 @@ setPlayerBoard();
 restartBtn.addEventListener('click', function() {
     Game._playerOne._piece = '';
     Game._playerTwo._piece = '';
-    playerPiece.textContent = '';
+    Game._playerOne._playedMoves = [];
+    Game._playerTwo._playedMoves = [];
+
     tictactoe = undefined;
+    playerPiece.textContent = '';
+
     helper.restartGame(goBackBtn);
+
     winningContainer.classList.remove('show');
     cells.forEach((cell) => {
         helper.removeClass(cell, ['x', 'o']);
@@ -69,26 +74,42 @@ cells.forEach((cell) => {
         }
 
         if (tictactoe._playerOne._turn) {
-            tictactoe._playerOne.setPlayedMoves = target.id;
+            tictactoe._playerOne.setPlayedMoves = target.id.substring(0, 1);
             setWinningMessage(setPlayerTurn(false, true, tictactoe._playerOne._playedMoves), tictactoe._playerOne._name);
 
         } else {
-            tictactoe._playerTwo.setPlayedMoves = target.id;
+            tictactoe._playerTwo.setPlayedMoves = target.id.substring(0, 1);
             setWinningMessage(setPlayerTurn(true, false, tictactoe._playerTwo._playedMoves), tictactoe._playerTwo._name);
         }
 
 
         function setWinningMessage(hasWon, playerName) {
-            if (hasWon) {
-                winningMessage.textContent = "You won " + playerName;
-                winningContainer.classList.add('show');
+            if (hasWon.result) {
+                let count = 6;
+                const intervalId = setInterval(function() {
+                    if (count % 2 == 0) {
+                        hasWon.combo.map(id => {
+                            document.getElementById(id + '-cell').classList.add('wincell');
+                        });
+                    } else {
+                        hasWon.combo.map(id => {
+                            document.getElementById(id + '-cell').classList.remove('wincell');
+                        });
+                    }
+                    count -= 1;
+                    if (count === 0) {
+                        winningMessage.textContent = "You won " + playerName;
+                        winningContainer.classList.add('show');
+                        clearInterval(intervalId);
+                    }
+                }, 250)
             }
         }
 
         function setPlayerTurn(x, y, playedMoves) {
             tictactoe._playerOne._turn = x;
             tictactoe._playerTwo._turn = y;
-            return tictactoe.hasWon(playedMoves)
+            return tictactoe.hasWon(playedMoves);
         }
 
         function setBoardAndPlayedCell(y, z) {

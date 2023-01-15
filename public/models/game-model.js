@@ -77,8 +77,14 @@ export class TicTacToe extends Game {
     }
 
     hasWon(playedMoves) {
-        return this._winnigPossibilities.some(combo => {
-            return combo.every(c => playedMoves.includes(c))
+        let combo, hasWon = undefined;
+        this._winnigPossibilities.some(combination => {
+            var result = combination.every(c => playedMoves.includes(c))
+            if (result) {
+                combo = combination;
+                hasWon = result;
+            }
         })
+        return { result: hasWon, combo: combo }
     }
 }

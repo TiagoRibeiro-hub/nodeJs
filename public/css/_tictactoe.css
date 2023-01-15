@@ -109,7 +109,9 @@
     background-color: #002c42;
 }
 
-.wincell {
+.cell.x.wincell::before,
+.cell.x.wincell::after,
+.cell.o.wincell::before {
     background-color: #60c050;
 }
 
@@ -124,12 +126,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-button {
-    cursor: pointer;
-    border: none;
-    color: #333;
 }
 
 #winning-message {
