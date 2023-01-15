@@ -97,9 +97,11 @@ flipCoinBtns.forEach((btn) => {
         const result = helper.flipCoin();
         const introSymbol = document.getElementById("intro-symbol");
         if (game._playerOne._coinSide === result) {
+            game._playerOne.setTurn = true;
             game.setStartingPlayer = game._playerOne._name;
             introSymbol.textContent = "Choose your symbol " + game._playerOne._name + " :"
         } else {
+            game._playerTwo.setTurn = true;
             game.setStartingPlayer = game._playerTwo._name;
             introSymbol.textContent = "Choose your symbol " + game._playerTwo._name + " :"
         }

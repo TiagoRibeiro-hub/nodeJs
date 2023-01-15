@@ -50,12 +50,18 @@ const helper = function() {
         goBackBtn.click();
         goBackBtn.classList.remove('hidden');
     }
+    let _removeClass = function(element, classList) {
+        classList.map(className => {
+            element.classList.remove(className);
+        });
+    }
     return {
         randomNumber: _randomNumber,
         flipCoin: _flipCoin,
         toggle: _toggle,
         toggleHideAndShow: _toggleHideAndShow,
-        restartGame: _restartGame
+        restartGame: _restartGame,
+        removeClass: _removeClass
     };
 }
 

@@ -48,31 +48,29 @@
     box-shadow: 0px 0px 4px 2px #000000;
     border: 2px solid var(--color-white);
     cursor: pointer;
-    line-height: 100px;
-    padding: 0.2em;
 }
 
 .cell.x,
-.cell.circle {
+.cell.o {
     cursor: not-allowed;
 }
 
 .cell.x::before,
 .cell.x::after,
-.cell.circle::before {
+.cell.o::before {
     background-color: var(--color-white);
 }
 
-.tictactoe-board.x .cell:not(.x):not(.circle):hover::before,
-.tictactoe-board.x .cell:not(.x):not(.circle):hover::after,
-.tictactoe-board.circle .cell:not(.x):not(.circle):hover::before {
+.tictactoe-board.x .cell:not(.x):not(.o):hover::before,
+.tictactoe-board.x .cell:not(.x):not(.o):hover::after,
+.tictactoe-board.o .cell:not(.x):not(.o):hover::before {
     background-color: rgb(126, 126, 126);
 }
 
 .cell.x::before,
 .cell.x::after,
-.tictactoe-board.x .cell:not(.x):not(.circle):hover::before,
-.tictactoe-board.x .cell:not(.x):not(.circle):hover::after {
+.tictactoe-board.x .cell:not(.x):not(.o):hover::before,
+.tictactoe-board.x .cell:not(.x):not(.o):hover::after {
     content: '';
     position: absolute;
     width: calc(var(--mark-size) * .15);
@@ -80,32 +78,32 @@
 }
 
 .cell.x::before,
-.tictactoe-board.x .cell:not(.x):not(.circle):hover::before {
+.tictactoe-board.x .cell:not(.x):not(.o):hover::before {
     transform: rotate(45deg);
 }
 
 .cell.x::after,
-.tictactoe-board.x .cell:not(.x):not(.circle):hover::after {
+.tictactoe-board.x .cell:not(.x):not(.o):hover::after {
     transform: rotate(-45deg);
 }
 
-.cell.circle::before,
-.cell.circle::after,
-.tictactoe-board.circle .cell:not(.x):not(.circle):hover::before,
-.tictactoe-board.circle .cell:not(.x):not(.circle):hover::after {
+.cell.o::before,
+.cell.o::after,
+.tictactoe-board.o .cell:not(.x):not(.o):hover::before,
+.tictactoe-board.o .cell:not(.x):not(.o):hover::after {
     content: '';
     position: absolute;
     border-radius: 50%;
 }
 
-.cell.circle::before,
-.tictactoe-board.circle .cell:not(.x):not(.circle):hover::before {
+.cell.o::before,
+.tictactoe-board.o .cell:not(.x):not(.o):hover::before {
     width: var(--mark-size);
     height: var(--mark-size);
 }
 
-.cell.circle::after,
-.tictactoe-board.circle .cell:not(.x):not(.circle):hover::after {
+.cell.o::after,
+.tictactoe-board.o .cell:not(.x):not(.o):hover::after {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) * .7);
     background-color: #002c42;
@@ -115,17 +113,37 @@
     background-color: #60c050;
 }
 
+#winning-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 button {
     cursor: pointer;
     border: none;
     color: #333;
 }
 
+#winning-message {
+    font-size: 2.5em;
+    margin-bottom: 1.5rem;
+}
+
 #restart {
     font-size: 1.5em;
     padding: 5px 10px;
-    margin: 20px auto;
-    display: block;
+}
+
+#winning-container.show {
+    display: flex;
 }
 
 .choose:active,
