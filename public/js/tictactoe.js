@@ -187,7 +187,7 @@ function setBoardInfo(playerName) {
 // THE MANCHINE GAME
 function theMachineMove(aiPlayer, humanPlayer) {
 
-    if (tictactoe.emptySquares().length === 9 || tictactoe._board.find(x => x == 4) == undefined) {
+    if (tictactoe.emptySquares().length === 9 || tictactoe._board.find(x => x == 4) != undefined) {
         document.getElementById("4-cell").click();
     } else {
         var _aiPlayer = aiPlayer;
