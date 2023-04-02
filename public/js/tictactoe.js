@@ -112,7 +112,10 @@ function clickCellsEvent() {
                         won.result == undefined &&
                         tictactoe._playerTwo._name === constants.game.The_Machine
                     ) {
-                        theMachineMove(tictactoe._playerTwo._piece, tictactoe._playerOne._piece);
+                        const id = setTimeout(function() {
+                            clearTimeout(id);
+                            theMachineMove(tictactoe._playerTwo._piece, tictactoe._playerOne._piece);
+                        }, 1000)
                     }
                 } else {
                     tictactoe._playerTwo.setPlayedMoves = move;
@@ -121,7 +124,7 @@ function clickCellsEvent() {
                 }
 
                 if (won != undefined && won.result == undefined && boardLength === 0) {
-                    winningMessage.textContent = "Is a tie";
+                    winningMessage.textContent = "It is a tie";
                     winningContainer.classList.add("show");
                 }
 
