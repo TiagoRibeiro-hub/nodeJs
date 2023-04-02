@@ -186,39 +186,41 @@ function setBoardInfo(playerName) {
 
 // THE MANCHINE GAME
 function theMachineMove(aiPlayer, humanPlayer) {
-    var _aiPlayer = aiPlayer;
-    var _humanPlayer = humanPlayer;
-    switch (tictactoe._difficulty) {
-        case constants.game.EASY:
-            playEasy();
-            break;
-        case constants.game.MEDIUM:
-            playMedium();
-            break;
-        case constants.game.HARD:
-            playHard();
-            break;
+
+    if (tictactoe.emptySquares().length === 9 || tictactoe._board.find(x => x == 4) == undefined) {
+        document.getElementById("4-cell").click();
+    } else {
+        var _aiPlayer = aiPlayer;
+        var _humanPlayer = humanPlayer;
+        switch (tictactoe._difficulty) {
+            case constants.game.EASY:
+                playEasy();
+                break;
+            case constants.game.MEDIUM:
+                playMedium();
+                break;
+            case constants.game.HARD:
+                playHard();
+                break;
+        }
     }
 
     function playEasy() {
         const possibelMoves = tictactoe.emptySquares();
         const randomIndex = Math.floor(Math.random() * possibelMoves.length);
-        document
-            .getElementById(possibelMoves[randomIndex].toString() + "-cell")
-            .click();
+        document.getElementById(possibelMoves[randomIndex].toString() + "-cell").click();
     }
 
-    function playMedium() {}
+    function playMedium() {
+
+    }
 
     function playHard() {
-        const bestMove = tictactoe.emptySquares().length === 9 ?
-            4 :
-            minimax(tictactoe._board, tictactoe._playerTwo._piece).index;
-
+        const bestMove = minimax(tictactoe._board, tictactoe._playerTwo._piece).index;
         document.getElementById(bestMove.toString() + "-cell").click();
     }
 
-    function minimax(newBoard, playerPiece, level = undefined) {
+    function minimax(newBoard, playerPiece) {
         var availableSpots = tictactoe.emptySquares(newBoard);
 
         // checks for the terminal states such as win, lose, and tie and returning a value accordingly
@@ -277,6 +279,7 @@ function theMachineMove(aiPlayer, humanPlayer) {
             }
         }
         // return the chosen move (object) from the moves array
+        console.log(moves)
         return moves[bestMove];
     }
 
