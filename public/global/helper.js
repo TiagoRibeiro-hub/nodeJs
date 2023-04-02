@@ -8,6 +8,13 @@ const introScreen = document.getElementById('intro-screen');
 const gameScreen = document.getElementById('game-screen')
     // function
 const helper = function() {
+    let _sleep = function(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+    }
     let _randomNumber = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
@@ -61,7 +68,8 @@ const helper = function() {
         toggle: _toggle,
         toggleHideAndShow: _toggleHideAndShow,
         restartGame: _restartGame,
-        removeClass: _removeClass
+        removeClass: _removeClass,
+        sleep: _sleep
     };
 }
 
