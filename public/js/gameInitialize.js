@@ -70,8 +70,8 @@ difficultyBtns.forEach((btn) => {
             case constants.game.MEDIUM:
                 game.setDifficulty = constants.game.MEDIUM;
                 break;
-            case constants.game.DIFFICULTY:
-                game.setDifficulty = constants.game.DIFFICULTY;
+            case constants.game.HARD:
+                game.setDifficulty = constants.game.HARD;
                 break;
         }
         helper.toggleHideAndShow(constants.game.DIFFICULTY);
