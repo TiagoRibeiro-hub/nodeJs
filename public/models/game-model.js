@@ -64,7 +64,7 @@ export class TicTacToe extends Game {
         this._board[move] = symbol;
     }
 
-    emptySquares(newBoard = this._board) {
+    emptySquares(newBoard) {
         let availSpots = [];
         for (var i = 0; i < newBoard.length; i++) {
             if (newBoard[i] == 0) {
@@ -108,8 +108,8 @@ export class TicTacToe extends Game {
         let combo = undefined;
         const hasWon = this.winning(this._board, playerPiece);
         if (hasWon) {
+            let count = 0;
             this.winnigPossibilities().some((combination) => {
-                let count = 0;
                 combination.map((c) => {
                     if (this._board[c] == playerPiece) {
                         count += 1;
@@ -117,6 +117,8 @@ export class TicTacToe extends Game {
                 });
                 if (count == 3) {
                     combo = combination;
+                } else {
+                    count = 0;
                 }
             });
         }
@@ -130,14 +132,12 @@ export class AI {
         this._aiPlayer = aiPlayer;
         this._humanPlayer = humanPlayer;
         this._alpha = alpha;
-        this._beta = beta
+        this._beta = beta;
         this._availableSpotsFunc = availableSpotsFunc;
-        this._winningFunc = winningFunc
+        this._winningFunc = winningFunc;
     }
 
-    minimax(
-        newBoard, playerPiece, depth,
-        alpha = this._alpha, beta = this._beta) {
+    minimax(newBoard, playerPiece, depth, alpha, beta) {
 
         var availableSpots = this._availableSpotsFunc(newBoard);
 

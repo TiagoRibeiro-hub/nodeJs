@@ -6,15 +6,9 @@ const difficultyScreen = document.getElementById('difficulty-screen');
 const flipCoinScreen = document.getElementById('flipCoin-screen');
 const introScreen = document.getElementById('intro-screen');
 const gameScreen = document.getElementById('game-screen')
-    // function
+const goBackBtn = document.getElementById('go-back');
+// function
 const helper = function() {
-    let _sleep = function(milliseconds) {
-        const date = Date.now();
-        let currentDate = null;
-        do {
-            currentDate = Date.now();
-        } while (currentDate - date < milliseconds);
-    }
     let _randomNumber = function(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
@@ -51,7 +45,7 @@ const helper = function() {
                 break;
         }
     };
-    let _restartGame = function(goBackBtn) {
+    let _restartGame = function() {
         _toggleHideAndShow(constants.game.GAME_TABLE);
         _toggleHideAndShow(constants.game.INTRO);
         goBackBtn.click();
@@ -68,8 +62,7 @@ const helper = function() {
         toggle: _toggle,
         toggleHideAndShow: _toggleHideAndShow,
         restartGame: _restartGame,
-        removeClass: _removeClass,
-        sleep: _sleep
+        removeClass: _removeClass
     };
 }
 
