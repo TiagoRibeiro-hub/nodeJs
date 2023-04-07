@@ -220,67 +220,72 @@ function theMachineMove(aiPlayer, humanPlayer) {
         document.getElementById(bestMove.toString() + "-cell").click();
     }
 
-    function minimax(newBoard, playerPiece) {
+    function minimax(newBoard, playerPiece, depth, alpha, beta) {
         var availableSpots = tictactoe.emptySquares(newBoard);
 
         // checks for the terminal states such as win, lose, and tie and returning a value accordingly
         // _playerTwo always AI     
         if (winning(newBoard, _humanPlayer)) {
-            return { score: -10 };
+            return { score: -20 + depth };
         } else if (winning(newBoard, _aiPlayer)) {
-            return { score: 10 };
+            return { score: 20 + depth };
         } else if (availableSpots.length === 0) {
             return { score: 0 };
         }
 
-        // an array to collect all the objects
-        var moves = [];
-        // loop through available spots
-        for (var i = 0; i < availableSpots.length; i++) {
-            //create an object for each and store the index of that spot 
-            var move = {};
-            move.index = newBoard[availableSpots[i]];
-
-            // set the empty spot to the current player
-            newBoard[availableSpots[i]] = playerPiece;
-
-            // collect the score resulted from calling minimax on the opponent of the current player
-            if (playerPiece == _aiPlayer) {
-                var result = minimax(newBoard, _humanPlayer);
-                move.score = result.score;
-            } else {
-                var result = minimax(newBoard, _aiPlayer);
-                move.score = result.score;
-            }
-            // reset the spot to empty
-            newBoard[availableSpots[i]] = move.index;
-            // push the object to the array
-            moves.push(move);
-        }
-
-        // if it is the computer's turn loop over the moves and choose the move with the highest score
-        var bestMove;
+        let bestScore = 0;
+        let bestMove = {};
+        depth += 1;
         if (playerPiece === _aiPlayer) {
-            var bestScore = -10000;
-            for (var i = 0; i < moves.length; i++) {
-                if (moves[i].score > bestScore) {
-                    bestScore = moves[i].score;
-                    bestMove = i;
+            // ai is the maximiser
+            bestScore = -10000;
+
+            for (var i = 0; i < availableSpots.length; i++) {
+                // set the empty spot to the current player
+                newBoard[availableSpots[i]] = playerPiece;
+
+                var value = minimax(newBoard, depth, alpha, beta, opponent_mark);
+                if (value.score > bestScore) {
+                    bestScore = value.score;
+                    bestMove.index = availSpots[i];
+                    bestMove.score = bestScore;
+                }
+
+                // reset the spot to empty for the next loop itereration
+                newBoard[availSpots[i]] = 0;
+
+                alpha = Math.max(alpha, bestScore);
+                if (beta <= alpha) {
+                    break;
                 }
             }
+            return bestMove;
+
         } else {
-            // else loop over the moves and choose the move with the lowest score
-            var bestScore = 10000;
-            for (var i = 0; i < moves.length; i++) {
-                if (moves[i].score < bestScore) {
-                    bestScore = moves[i].score;
-                    bestMove = i;
+            // human is the minimiser
+            bestScore = 10000;
+
+            for (var i = 0; i < availSpots.length; i++) {
+                // set the empty spot to the current player
+                newBoard[availSpots[i]] = playerPiece;
+
+                var value = minimax(newBoard, depth + 1, alpha, beta, player_mark);
+                if (value.score < bestScore) {
+                    bestScore = value.score;
+                    bestMove.index = availSpots[i];
+                    bestMove.score = bestScore;
+                }
+
+                // reset the spot to empty for the next loop itereration
+                newBoard[availSpots[i]] = 0;
+
+                beta = Math.min(beta, bestScore);
+                if (beta <= alpha) {
+                    break;
                 }
             }
+            return bestMove;
         }
-        // return the chosen move (object) from the moves array
-        console.log(moves)
-        return moves[bestMove];
     }
 
     function winning(board, player) {

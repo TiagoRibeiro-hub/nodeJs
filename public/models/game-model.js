@@ -186,7 +186,7 @@ export class AI {
                 var stateScore = undefined; // this stores the minimax value we'll compute
 
                 if (state.turn !== this._aiPlayerPiece) {
-                    // X maximizs --> initialize to a value smaller than any possible score
+                    // X maximizes --> initialize to a value smaller than any possible score
                     stateScore = -1000;
                 } else {
                     // O minimizes --> initialize to a value larger than any possible score
