@@ -113,25 +113,16 @@ function clickCellsEvent() {
                 if (tictactoe._playerOne._turn) {
                     won = setPlayerTurn(false, true);
                     setWinningMessage(won, tictactoe._playerOne._name);
-
-                    if (
-                        boardLength > 0 &&
-                        won.result == false &&
-                        tictactoe._playerTwo._name === constants.game.The_Machine
-                    ) {
-                        const id = setTimeout(function() {
-                            clearTimeout(id);
-                            theMachineMove();
-                        }, 1000);
-                    }
                 } else {
                     won = setPlayerTurn(true, false);
                     setWinningMessage(won, tictactoe._playerTwo._name);
                 }
 
-                if (won != undefined && won.result == false && boardLength === 0) {
-                    winningMessage.textContent = "It is a tie";
-                    winningContainer.classList.add("show");
+                if (boardLength > 0 && won.result == false && tictactoe._playerTwo._turn && tictactoe._playerTwo._name === constants.game.The_Machine) {
+                    const id = setTimeout(function() {
+                        clearTimeout(id);
+                        theMachineMove();
+                    }, 1000);
                 }
 
                 function setWinningMessage(hasWon, playerName) {
@@ -154,6 +145,9 @@ function clickCellsEvent() {
                                 winningContainer.classList.add("show");
                             }
                         }, 150);
+                    } else if (!won.result && boardLength === 0) {
+                        winningMessage.textContent = "It is a tie";
+                        winningContainer.classList.add("show");
                     }
                 }
 
@@ -188,10 +182,7 @@ function setBoardInfo(playerName) {
 
 // THE MANCHINE GAME
 function theMachineMove() {
-    if (
-        tictactoe.emptySquares().length === 9 ||
-        tictactoe._board.find((x, i) => x[i] == 0) != undefined
-    ) {
+    if (tictactoe._board[4] == 0) {
         document.getElementById("4-cell").click();
     } else {
         switch (tictactoe._difficulty) {
