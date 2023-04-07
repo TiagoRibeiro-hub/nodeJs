@@ -84,7 +84,7 @@ function theGame() {
     loader.removeLoader(loader.loaderSelector);
 
     if (_TicTacToe._playerTwo._name === constants.game.The_Machine && _TicTacToe._playerTwo._turn) {
-        theMachineMove(_TicTacToe, _AI);
+        theMachineMove();
     }
 }
 
@@ -115,8 +115,8 @@ function clickCellsEvent() {
 
                 if (won.result) {
                     _TicTacToe._playerOne._turn ?
-                        setWinningMessage(won, _TicTacToe._playerOne._name) :
-                        setWinningMessage(won, _TicTacToe._playerTwo._name);
+                        setWinningMessage(won.combo, _TicTacToe._playerOne._name) :
+                        setWinningMessage(won.combo, _TicTacToe._playerTwo._name);
 
                 } else if (!won.result && boardLength === 0) {
                     winningMessage.textContent = "It is a tie";
@@ -124,13 +124,13 @@ function clickCellsEvent() {
 
                 } else {
                     _TicTacToe._playerOne._turn ?
-                        setPlayerTurn(false, true, _TicTacToe) :
-                        setPlayerTurn(true, false, _TicTacToe);
+                        setPlayerTurn(false, true) :
+                        setPlayerTurn(true, false);
 
                     if (boardLength > 0 && won.result == false && _TicTacToe._playerTwo._turn && _TicTacToe._playerTwo._name === constants.game.The_Machine) {
                         const id = setTimeout(function() {
                             clearTimeout(id);
-                            theMachineMove(_TicTacToe, _AI);
+                            theMachineMove();
                         }, 1000);
                     }
                 }
@@ -139,40 +139,38 @@ function clickCellsEvent() {
     });
 }
 
-function setWinningMessage(hasWon, playerName) {
-    if (hasWon.result) {
-        let count = 6;
-        const intervalId = setInterval(function() {
-            if (count % 2 == 0) {
-                hasWon.combo.map((id) => {
-                    document.getElementById(id + "-cell").classList.add("wincell");
-                });
-            } else {
-                hasWon.combo.map((id) => {
-                    document.getElementById(id + "-cell").classList.remove("wincell");
-                });
-            }
-            count -= 1;
-            if (count === 0) {
-                clearInterval(intervalId);
-                winningMessage.textContent = "You won " + playerName;
-                winningContainer.classList.add("show");
-            }
-        }, 150);
-    }
+function setWinningMessage(combo, playerName) {
+    let count = 6;
+    const intervalId = setInterval(function() {
+        if (count % 2 == 0) {
+            combo.map((id) => {
+                document.getElementById(id + "-cell").classList.add("wincell");
+            });
+        } else {
+            combo.map((id) => {
+                document.getElementById(id + "-cell").classList.remove("wincell");
+            });
+        }
+        count -= 1;
+        if (count === 0) {
+            clearInterval(intervalId);
+            winningMessage.textContent = "You won " + playerName;
+            winningContainer.classList.add("show");
+        }
+    }, 150);
 }
 
-function setPlayerTurn(pOne, pTwo, tictactoe) {
-    tictactoe._playerOne._turn = pOne;
-    tictactoe._playerTwo._turn = pTwo;
+function setPlayerTurn(pOne, pTwo) {
+    _TicTacToe._playerOne._turn = pOne;
+    _TicTacToe._playerTwo._turn = pTwo;
 
     labelInfo.textContent = pOne ?
-        setBoardInfo(tictactoe._playerOne._name) :
-        setBoardInfo(tictactoe._playerTwo._name);
+        setBoardInfo(_TicTacToe._playerOne._name) :
+        setBoardInfo(_TicTacToe._playerTwo._name);
 
     playerPiece.textContent = pOne ?
-        tictactoe._playerOne._piece :
-        tictactoe._playerTwo._piece;
+        _TicTacToe._playerOne._piece :
+        _TicTacToe._playerTwo._piece;
 }
 
 function setTictactoeBoard(y, z) {
@@ -185,26 +183,26 @@ function setBoardInfo(playerName) {
 }
 
 // THE MANCHINE GAME
-function theMachineMove(tictactoe, ai) {
-    if (tictactoe._board[4] === 0) {
+function theMachineMove() {
+    if (_TicTacToe._board[4] === 0) {
         document.getElementById("4-cell").click();
     } else {
-        switch (tictactoe._difficulty) {
+        switch (_TicTacToe._difficulty) {
             case constants.game.EASY:
-                playEasy(tictactoe);
+                playEasy();
                 break;
             case constants.game.MEDIUM:
                 playMedium();
                 break;
             case constants.game.HARD:
-                playHard(tictactoe, ai);
+                playHard();
                 break;
         }
     }
 }
 
-function playEasy(tictactoe) {
-    const possibelMoves = tictactoe.emptySquares(tictactoe._board);
+function playEasy() {
+    const possibelMoves = _TicTacToe.emptySquares(_TicTacToe._board);
     const randomIndex = Math.floor(Math.random() * possibelMoves.length);
     document
         .getElementById(possibelMoves[randomIndex].toString() + "-cell")
@@ -213,13 +211,13 @@ function playEasy(tictactoe) {
 
 function playMedium() {}
 
-function playHard(tictactoe, ai) {
-    const bestMove = ai.minimax(
-        tictactoe._board,
-        tictactoe._playerTwo._piece,
+function playHard() {
+    const bestMove = _AI.minimax(
+        _TicTacToe._board,
+        _TicTacToe._playerTwo._piece,
         0,
-        ai._alpha,
-        ai._beta
+        _AI._alpha,
+        _AI._beta
     );
     console.log(bestMove.index)
     document.getElementById(bestMove.index.toString() + "-cell").click();
