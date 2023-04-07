@@ -244,7 +244,7 @@ function theMachineMove(aiPlayer, humanPlayer) {
                 // set the empty spot to the current player
                 newBoard[availableSpots[i]] = playerPiece;
 
-                var value = minimax(newBoard, depth, alpha, beta, opponent_mark);
+                var value = minimax(newBoard, depth, alpha, beta, _humanPlayer);
                 if (value.score > bestScore) {
                     bestScore = value.score;
                     bestMove.index = availSpots[i];
@@ -269,7 +269,7 @@ function theMachineMove(aiPlayer, humanPlayer) {
                 // set the empty spot to the current player
                 newBoard[availSpots[i]] = playerPiece;
 
-                var value = minimax(newBoard, depth + 1, alpha, beta, player_mark);
+                var value = minimax(newBoard, depth + 1, alpha, beta, _aiPlayer);
                 if (value.score < bestScore) {
                     bestScore = value.score;
                     bestMove.index = availSpots[i];
