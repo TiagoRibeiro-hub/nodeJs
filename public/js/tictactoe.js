@@ -1,4 +1,4 @@
-import { TicTacToe } from "../models/game-model.js";
+import { TicTacToe, AI } from "../models/game-model.js";
 import Game from "./gameInitialize.js";
 import loader from "./loader.js";
 import constants from "../global/constants.js";
@@ -17,6 +17,7 @@ const restartBtn = document.getElementById("restart");
 const cells = document.querySelectorAll(".cell");
 // tictactoe
 var tictactoe = undefined;
+var ai = undefined;
 // function
 function setPlayerBoard() {
     const intervalIdBoard = setInterval(function() {
@@ -41,13 +42,21 @@ function setPlayerBoard() {
                     }
                     if (tictactoe === undefined) {
                         tictactoe = new TicTacToe(Game);
+                        ai = new AI(
+                            tictactoe._playerTwo._piece,
+                            tictactoe._playerOne._piece, -10000,
+                            10000,
+                            tictactoe.emptySquares,
+                            tictactoe.winning
+                        );
                     }
                     loader.removeLoader(loader.loaderSelector);
                     clearInterval(intervalIdBoard);
 
                     clickCellsEvent();
+
                     if (machineStart) {
-                        theMachineMove(tictactoe._playerTwo._piece, tictactoe._playerOne._piece);
+                        theMachineMove();
                     }
                 }
             }
@@ -61,12 +70,11 @@ setPlayerBoard();
 restartBtn.addEventListener("click", function() {
     Game._playerOne._piece = "";
     Game._playerTwo._piece = "";
-    Game._playerOne._playedMoves = [];
-    Game._playerTwo._playedMoves = [];
     Game._playerOne._turn = false;
     Game._playerTwo._turn = false;
 
     tictactoe = undefined;
+    ai = undefined;
 
     playerPiece.textContent = "";
     labelInfo.textContent = "";
@@ -91,7 +99,6 @@ function clickCellsEvent() {
             function(e) {
                 const target = e.target;
                 const move = target.id.substring(0, 1);
-                const boardLength = tictactoe.emptySquares().length - 1;
 
                 if (tictactoeBoard.classList.contains("x")) {
                     setBoard("x", "o");
@@ -100,30 +107,29 @@ function clickCellsEvent() {
                     setBoard("o", "x");
                     tictactoe.setBoard(parseInt(move), "O");
                 }
+                const boardLength = tictactoe.emptySquares().length - 1;
 
                 let won = undefined;
                 if (tictactoe._playerOne._turn) {
-                    tictactoe._playerOne.setPlayedMoves = move;
-                    won = setPlayerTurn(false, true, tictactoe._playerOne._playedMoves);
+                    won = setPlayerTurn(false, true);
                     setWinningMessage(won, tictactoe._playerOne._name);
 
                     if (
                         boardLength > 0 &&
-                        won.result == undefined &&
+                        won.result == false &&
                         tictactoe._playerTwo._name === constants.game.The_Machine
                     ) {
                         const id = setTimeout(function() {
                             clearTimeout(id);
-                            theMachineMove(tictactoe._playerTwo._piece, tictactoe._playerOne._piece);
-                        }, 1000)
+                            theMachineMove();
+                        }, 1000);
                     }
                 } else {
-                    tictactoe._playerTwo.setPlayedMoves = move;
-                    won = setPlayerTurn(true, false, tictactoe._playerTwo._playedMoves);
+                    won = setPlayerTurn(true, false);
                     setWinningMessage(won, tictactoe._playerTwo._name);
                 }
 
-                if (won != undefined && won.result == undefined && boardLength === 0) {
+                if (won != undefined && won.result == false && boardLength === 0) {
                     winningMessage.textContent = "It is a tie";
                     winningContainer.classList.add("show");
                 }
@@ -134,28 +140,24 @@ function clickCellsEvent() {
                         const intervalId = setInterval(function() {
                             if (count % 2 == 0) {
                                 hasWon.combo.map((id) => {
-                                    document
-                                        .getElementById(id + "-cell")
-                                        .classList.add("wincell");
+                                    document.getElementById(id + "-cell").classList.add("wincell");
                                 });
                             } else {
                                 hasWon.combo.map((id) => {
-                                    document
-                                        .getElementById(id + "-cell")
-                                        .classList.remove("wincell");
+                                    document.getElementById(id + "-cell").classList.remove("wincell");
                                 });
                             }
                             count -= 1;
                             if (count === 0) {
+                                clearInterval(intervalId);
                                 winningMessage.textContent = "You won " + playerName;
                                 winningContainer.classList.add("show");
-                                clearInterval(intervalId);
                             }
                         }, 150);
                     }
                 }
 
-                function setPlayerTurn(pOne, pTwo, playedMoves) {
+                function setPlayerTurn(pOne, pTwo) {
                     tictactoe._playerOne._turn = pOne;
                     tictactoe._playerTwo._turn = pTwo;
 
@@ -167,7 +169,7 @@ function clickCellsEvent() {
                         tictactoe._playerOne._piece :
                         tictactoe._playerTwo._piece;
 
-                    return tictactoe.hasWon(playedMoves);
+                    return !pOne ? tictactoe.hasWon(tictactoe._playerOne._piece) : tictactoe.hasWon(tictactoe._playerTwo._piece);
                 }
 
                 function setBoard(y, z) {
@@ -178,20 +180,20 @@ function clickCellsEvent() {
             }, { once: true }
         );
     });
-};
+}
 
 function setBoardInfo(playerName) {
     return "Player " + playerName + " turn";
 }
 
 // THE MANCHINE GAME
-function theMachineMove(aiPlayer, humanPlayer) {
-
-    if (tictactoe.emptySquares().length === 9 || tictactoe._board.find(x => x == 4) != undefined) {
+function theMachineMove() {
+    if (
+        tictactoe.emptySquares().length === 9 ||
+        tictactoe._board.find((x, i) => x[i] == 0) != undefined
+    ) {
         document.getElementById("4-cell").click();
     } else {
-        var _aiPlayer = aiPlayer;
-        var _humanPlayer = humanPlayer;
         switch (tictactoe._difficulty) {
             case constants.game.EASY:
                 playEasy();
@@ -208,100 +210,19 @@ function theMachineMove(aiPlayer, humanPlayer) {
     function playEasy() {
         const possibelMoves = tictactoe.emptySquares();
         const randomIndex = Math.floor(Math.random() * possibelMoves.length);
-        document.getElementById(possibelMoves[randomIndex].toString() + "-cell").click();
+        document
+            .getElementById(possibelMoves[randomIndex].toString() + "-cell")
+            .click();
     }
 
-    function playMedium() {
-
-    }
+    function playMedium() {}
 
     function playHard() {
-        const bestMove = minimax(tictactoe._board, tictactoe._playerTwo._piece).index;
-        document.getElementById(bestMove.toString() + "-cell").click();
-    }
-
-    function minimax(newBoard, playerPiece, depth, alpha, beta) {
-        var availableSpots = tictactoe.emptySquares(newBoard);
-
-        // checks for the terminal states such as win, lose, and tie and returning a value accordingly
-        // _playerTwo always AI     
-        if (winning(newBoard, _humanPlayer)) {
-            return { score: -20 + depth };
-        } else if (winning(newBoard, _aiPlayer)) {
-            return { score: 20 + depth };
-        } else if (availableSpots.length === 0) {
-            return { score: 0 };
-        }
-
-        let bestScore = 0;
-        let bestMove = {};
-        depth += 1;
-        if (playerPiece === _aiPlayer) {
-            // ai is the maximiser
-            bestScore = -10000;
-
-            for (var i = 0; i < availableSpots.length; i++) {
-                // set the empty spot to the current player
-                newBoard[availableSpots[i]] = playerPiece;
-
-                var value = minimax(newBoard, depth, alpha, beta, _humanPlayer);
-                if (value.score > bestScore) {
-                    bestScore = value.score;
-                    bestMove.index = availSpots[i];
-                    bestMove.score = bestScore;
-                }
-
-                // reset the spot to empty for the next loop itereration
-                newBoard[availSpots[i]] = 0;
-
-                alpha = Math.max(alpha, bestScore);
-                if (beta <= alpha) {
-                    break;
-                }
-            }
-            return bestMove;
-
-        } else {
-            // human is the minimiser
-            bestScore = 10000;
-
-            for (var i = 0; i < availSpots.length; i++) {
-                // set the empty spot to the current player
-                newBoard[availSpots[i]] = playerPiece;
-
-                var value = minimax(newBoard, depth + 1, alpha, beta, _aiPlayer);
-                if (value.score < bestScore) {
-                    bestScore = value.score;
-                    bestMove.index = availSpots[i];
-                    bestMove.score = bestScore;
-                }
-
-                // reset the spot to empty for the next loop itereration
-                newBoard[availSpots[i]] = 0;
-
-                beta = Math.min(beta, bestScore);
-                if (beta <= alpha) {
-                    break;
-                }
-            }
-            return bestMove;
-        }
-    }
-
-    function winning(board, player) {
-        if (
-            (board[0] == player && board[1] == player && board[2] == player) ||
-            (board[3] == player && board[4] == player && board[5] == player) ||
-            (board[6] == player && board[7] == player && board[8] == player) ||
-            (board[0] == player && board[3] == player && board[6] == player) ||
-            (board[1] == player && board[4] == player && board[7] == player) ||
-            (board[2] == player && board[5] == player && board[8] == player) ||
-            (board[0] == player && board[4] == player && board[8] == player) ||
-            (board[2] == player && board[4] == player && board[6] == player)
-        ) {
-            return true;
-        } else {
-            return false;
-        }
+        const bestMove = ai.minimax(
+            tictactoe._board,
+            tictactoe._playerTwo._piece,
+            0
+        );
+        document.getElementById(bestMove.index.toString() + "-cell").click();
     }
 }
