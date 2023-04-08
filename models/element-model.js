@@ -1,5 +1,4 @@
 class ElementConfig {
-
     constructor(id, classList, title, text) {
         this._id = id;
         this._classList = classList;
@@ -9,7 +8,6 @@ class ElementConfig {
 }
 
 class InputConfig extends ElementConfig {
-
     constructor(type, id, classList, title, text) {
         super(id, classList, title, text);
         this._type = type;
