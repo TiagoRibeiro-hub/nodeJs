@@ -188,7 +188,7 @@ export class AI {
                 // reset the spot to empty for the next loop itereration
                 newBoard[availableSpots[i]] = 0;
 
-                beta = Math.min(beta, bestMove.bestScore);
+                beta = Math.min(beta, bestMove.score);
                 if (beta <= alpha) {
                     break;
                 }
